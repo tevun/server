@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+DIR_NAME=$(dirname $(readlink -f ${0}))
+BASE=$(dirname $(readlink -f "${DIR_NAME}/../.."))
+DOMAIN=$(basename $(readlink -f "${DIR_NAME}/.."))
+APP="${BASE}/app/${DOMAIN}"
+BRANCH="master"
+
+while read oldrev newrev ref
+do
+    BRANCH=`echo ${ref} | cut -d/ -f3`
+done
+
+if [ -f "${APP}/docker-compose.yml" ]; then
+  cd ${APP}
+  docker-compose down
+fi
+
+cd $(dirname ${DIR_NAME})
+GIT_WORK_TREE="${APP}" git checkout -f ${BRANCH}
+
+if [ -f "${APP}/docker-compose.yml" ]; then
+  cd ${APP}
+  docker-compose up -d
+  sh ./scripts/install.sh
+fi
+

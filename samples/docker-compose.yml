@@ -1,0 +1,45 @@
+version: '2'
+
+networks:
+  reverse-proxy:
+    external:
+      name: root_reverse-proxy
+
+volumes:
+  {domain}-mysql_data:
+    driver: local
+
+services:
+  {domain}-mysql:
+    image: mysql:5.6
+    container_name: {domain}-mysql
+    volumes:
+      - {domain}-mysql_data:/var/lib/mysql
+      - .:/var/www/app
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=database
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    expose:
+      - 9000
+
+  {domain}-app:
+    image: webdevops/php-apache-dev:7.0
+    container_name: {domain}-app
+    networks:
+      - reverse-proxy
+    volumes:
+      - .:/var/www/app
+    environment:
+      - VIRTUAL_HOST={domain}
+      - WEB_DOCUMENT_ROOT="/var/www/app/public"
+      # - PHP_DEBUGGER="xdebug"
+      # export XDEBUG_REMOTE_HOST=$(ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
+      # - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST}
+      # - XDEBUG_REMOTE_AUTOSTART=1
+    expose:
+      - 9000
+    links:
+      - {domain}-mysql
+
