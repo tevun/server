@@ -11,39 +11,39 @@ Depois de instalado ele irá disponibilizar para você um conjunto de comandos e
 
 A API Rest para gerenciar o servidor contém os endpoints:
 
-| METHOD | URL                        |
-|--------|----------------------------|
-| POST   | /v1/domains                |
-| GET    | /v1/domains/<domain>       |
-| DELETE | /v1/domains/<domain>       |
-| PATCH  | /v1/domains/<domain>/down  |
-| PATCH  | /v1/domains/<domain>/up    |
-| POST   | /v1/domains/<domain>/env   |
+| METHOD | URL                          |
+|--------|------------------------------|
+| POST   | /v1/domains                  |
+| GET    | /v1/domains/`<domain>`       |
+| DELETE | /v1/domains/`<domain>`       |
+| PATCH  | /v1/domains/`<domain>`/down  |
+| PATCH  | /v1/domains/`<domain>`/up    |
+| POST   | /v1/domains/`<domain>`/env   |
  
  E conta com os seguintes comandos:
  
- | COMMAND               | OUTPUT                           |
- |-----------------------|----------------------------------|
- | install <host> <port> | generated key                    |
- | info                  | <host>, <port> and generated key |
- | ls                    | domains list                     |
- | add <domain>          | docker-compose.yml & git remote  |
- | rm <domain>           | docker output                    |
- | up <domain>           | docker output                    |
- | down <domain>         | docker output                    |
+ | COMMAND                   | OUTPUT                               |
+ |---------------------------|--------------------------------------|
+ | install `<host>` `<port>` | generated key                        |
+ | info                      | `<host>`, `<port>` and generated key |
+ | ls                        | domains list                         |
+ | add `<domain>`            | docker-compose.yml & git remote      |
+ | rm `<domain>`             | docker output                        |
+ | up `<domain>`             | docker output                        |
+ | down `<domain>`           | docker output                        |
 
 ### O Cliente
 
 O Cliente disponibiliza os seguintes comandos:
 
- | COMMAND               | INPUT | OUTPUT                           |
- |-----------------------|-------|----------------------------------|
- | pair <host> <port>    | key   | pair confirmation
- | unpair <host> <port>  |       | hosts list                       |
- | paired                |       | hosts list                       |
- | use <host>            |       | selection confirmation           |
- | ls                    |       | domains list                     |
- | add <domain>          |       | docker-compose.yml & git remote  |
- | rm <domain>           |       | docker output                    |
- | up <domain>           |       | docker output                    |
- | down <domain>         |       | docker output                    |
+ | COMMAND                   | INPUT | OUTPUT                           |
+ |---------------------------|-------|----------------------------------|
+ | pair `<host>` `<port>`    | key   | pair confirmation                |
+ | unpair `<host>` `<port>`  |       | hosts list                       |
+ | paired                    |       | hosts list                       |
+ | use `<host>`              |       | selection confirmation           |
+ | ls                        |       | domains list                     |
+ | add `<domain>`            |       | docker-compose.yml & git remote  |
+ | rm `<domain>`             |       | docker output                    |
+ | up `<domain>`             |       | docker output                    |
+ | down `<domain>`           |       | docker output                    |
