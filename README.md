@@ -13,12 +13,14 @@ A API Rest para gerenciar o servidor contém os endpoints:
 
 | METHOD | URL                          |
 |--------|------------------------------|
+| GET    | /v1/domains                  |
 | POST   | /v1/domains                  |
 | GET    | /v1/domains/`<domain>`       |
 | DELETE | /v1/domains/`<domain>`       |
 | PATCH  | /v1/domains/`<domain>`/down  |
 | PATCH  | /v1/domains/`<domain>`/up    |
-| POST   | /v1/domains/`<domain>`/env   |
+| PUT    | /v1/domains/`<domain>`/env   |
+| GET    | /v1/domains/`<domain>`/env   |
  
  E conta com os seguintes comandos:
  
