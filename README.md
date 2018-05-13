@@ -1,7 +1,8 @@
-# Server Manager
+# Kata ~ Server Manager
 
 Este projeto é uma API de gerenciador de contêineres destinada à gerenciar múltiplos hosts em contêineres gerenciados por arquivos que seguem o padrão `docker-compose`.
 Utilizando ele você transforma seu VPS em um ambiente simples e rápido para deploy de aplicações.
+
 Para publicar uma aplicação basta executar um comando para criação de um `git remote` com um hook `post-receive` configurado para parar e subir seu projeto `docker-compose`.
 Com essa estratégia você pode instalar bancos de dados, criar volumes e manipular todo o ambiente remoto do seu servidor apenas com um comando `git push`.
 
