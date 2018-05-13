@@ -28,6 +28,20 @@ Para fazer este processo é preciso informar o `server key`, que será validado 
   >
 </p>
 
+Depois de feitas essas configurações você vai rodar o comando:
+```bash
+$ kata add example.com
+```
+E quando acessar no navegador verá:
+<p align="center">
+  <img 
+    src="https://github.com/brasil-php/server-manager/raw/master/images/works.png" 
+    alt="Pairing"
+  >
+</p>
+
+Você pode ver os arquivos que são gerados para esse setup inicial [aqui](https://github.com/brasil-php/server-manager/tree/master/samples)
+
 ### O Servidor
 
 A API Rest para gerenciar o servidor contém os endpoints:
