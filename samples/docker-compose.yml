@@ -3,7 +3,7 @@ version: '2'
 networks:
   reverse-proxy:
     external:
-      name: root_reverse-proxy
+      name: reverse-proxy
 
 volumes:
   {domain}-mysql_data:
