@@ -7,8 +7,8 @@ Para publicar uma aplicação basta executar um comando para criação de um `gi
 Com essa estratégia você pode instalar bancos de dados, criar volumes e manipular todo o ambiente remoto do seu servidor apenas com um comando `git push`.
 
 ### Acompanhe
-- [Grupo do Telegram](https://t.me/tevun)
-- [Twitter](https://t.me/tevunapp)
+- [Telegram](https://t.me/tevun)
+- [Twitter](https://twitter.com/tevunapp)
 - [Site](https://tevun.com)
 
 
