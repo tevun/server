@@ -102,8 +102,10 @@ O Cliente disponibiliza os seguintes comandos:
  
 Nestas versões iniciais ainda não temos vários recursos disponíveis, como a API e o CLI, mas temos um conjunto de comandos que já pode dar uma ideia do que está por vir.
  
-Como requisitos para rodar o projeto você precisa ter o `docker` e o `docker-compose` instalados ou ver se o seu sistema pode usar alguns dos nossos instaladores disponíveis dê uma olha [nesta seção](https://github.com/brasil-php/tevun/tree/master/installers).
-Mais informações sobre os instaladores [aqui](https://github.com/brasil-php/tevun#instalação-de-requisitos).
+Como requisitos para rodar o projeto você precisa ter o `docker` e o `docker-compose` instalados.
+Caso não tenha você pode ver se o seu sistema é compatível com algum dos nossos instaladores disponíveis.
+Dê uma olha [nesta pasta](https://github.com/brasil-php/tevun/tree/master/installers) para ver se encontra seu sitema na lista.
+Obtenha Mais informações sobre uso do nossos instaladores [aqui](https://github.com/brasil-php/tevun#instalação-de-requisitos).
 
 Para rodar o projeto em suas versões iniciais é preciso fazer os passos abaixo.
 
