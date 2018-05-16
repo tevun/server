@@ -1,0 +1,51 @@
+version: '2'
+
+# networks:
+#   reverse-proxy:
+#     external:
+#       name: reverse-proxy
+
+volumes:
+  tevun-arango_database_data:
+    driver: local
+
+  tevun-arango_apps_data:
+    driver: local
+
+services:
+  tevun-arango:
+    container_name: tevun-arango
+    image: arangodb/arangodb
+    environment:
+      - ARANGO_NO_AUTH=1
+    volumes:
+      - tevun-arango_database_data:/var/lib/arangodb
+      - tevun-arango_apps_data:/var/lib/arangodb-apps
+#    ports:
+#      - "8529:8529"
+
+  tevun-app:
+    build:
+      dockerfile: ./.docker/app/Dockerfile
+      context: .
+    container_name: tevun-app
+    depends_on:
+      - tevun-arango
+    links:
+      - tevun-arango
+#    restart: unless-stopped
+#    networks:
+#      - reverse-proxy
+    volumes:
+      - .:/var/www/app
+    environment:
+      - VIRTUAL_HOST=tevun
+      - WEB_DOCUMENT_ROOT="/var/www/app/public"
+#      - PHP_DEBUGGER="xdebug"
+# export XDEBUG_REMOTE_HOST=$(ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
+#      - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST}
+#      - XDEBUG_REMOTE_AUTOSTART=1
+    ports:
+      - 8000:80
+    expose:
+      - 9000

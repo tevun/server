@@ -1,0 +1,12 @@
+{
+  "require": {
+    "triagens/arangodb": "^3.3",
+    "slim/slim": "^3.0",
+    "monolog/monolog": "^1.23"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tevun\\": "api/"
+    }
+  }
+}
