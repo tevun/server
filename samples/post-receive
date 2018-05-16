@@ -14,7 +14,7 @@ done
 cd ${APP}
 
 if [ "$(docker ps -q -f name=${DOMAIN}-app)" ]; then
-  docker-compose down
+  docker-compose stop
 fi
 
 cd $(dirname ${DIR_NAME})
