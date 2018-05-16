@@ -30,6 +30,7 @@ if [ -f ".scripts/setup.sh" ]; then
 fi
 
 if [ -f "docker-compose.yml" ]; then
+  docker-compose rm
   docker-compose up -d
 fi
 
