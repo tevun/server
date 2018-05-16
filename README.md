@@ -79,8 +79,8 @@ A API Rest para gerenciar o servidor contém os endpoints:
  | ls                        | domains list                         |
  | create `<domain>`         | docker-compose.yml & git remote      |
  | destroy `<domain>`        | docker output                        |
- | live `<domain>`           | docker output                        |
- | die `<domain>`            | docker output                        |
+ | start `<domain>`          | docker output                        |
+ | stop `<domain>`           | docker output                        |
 
 ### O Cliente
 
