@@ -6,7 +6,13 @@ Utilizando ele você transforma seu VPS em um ambiente simples e rápido para de
 Para publicar uma aplicação basta executar um comando para criação de um `git remote` com um hook `post-receive` configurado para parar e subir seu projeto `docker-compose`.
 Com essa estratégia você pode instalar bancos de dados, criar volumes e manipular todo o ambiente remoto do seu servidor apenas com um comando `git push`.
 
-> Disclaimer:
+### Acompanhe
+[Grupo do Telegram](https://t.me/tevun)
+[Twitter](https://t.me/tevunapp)
+[Site](https://tevun.com)
+
+
+## Disclaimer
 > No momento não há ainda como fazer os procedimentos abaixo.
 > 
 > Para entender o estado do projeto atualmente clique [aqui](https://github.com/brasil-php/tevun#versões-iniciais) 
