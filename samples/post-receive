@@ -23,7 +23,7 @@ GIT_WORK_TREE="${APP}" git checkout -f ${BRANCH}
 
 cd ${APP}
 
-chown -R heimdall:heimdall .
+# chown -R heimdall:heimdall .
 
 if [ -f ".scripts/setup.sh" ]; then
   sh .scripts/setup.sh
