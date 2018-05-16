@@ -9,7 +9,7 @@ Com essa estratégia você pode instalar bancos de dados, criar volumes e manipu
 > Disclaimer:
 > No momento não há ainda como fazer os procedimentos abaixo.
 > 
-> Para entender o estado do projeto atualmente clique [aqui](https://github.com/brasil-php/tevun#versoes-iniciais) 
+> Para entender o estado do projeto atualmente clique [aqui](https://github.com/brasil-php/tevun#versões-iniciais) 
 
 ## Como isso funciona?
 
@@ -103,7 +103,7 @@ O Cliente disponibiliza os seguintes comandos:
 Nestas versões iniciais ainda não temos vários recursos disponíveis, como a API e o CLI, mas temos um conjunto de comandos que já pode dar uma ideia do que está por vir.
  
 Como requisitos para testar o projeto você precisa ter o `docker` e o `docker-compose` instalados ou ver se o seu sistema pode usar alguns dos nossos instaladores disponíveis [aqui](https://github.com/brasil-php/tevun/tree/master/installers).
-Mais informações sobre os instaladores [aqui](https://github.com/brasil-php/tevun#instalacao-de-requisitos).
+Mais informações sobre os instaladores [aqui](https://github.com/brasil-php/tevun#instalação-de-requisitos).
 
 Para rodar o projeto em suas versões iniciais é preciso fazer os passos abaixo.
 
