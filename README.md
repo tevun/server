@@ -1,4 +1,4 @@
-# SM ~ Server Manager
+# Tevun
 
 Este projeto é uma API de gerenciador de contêineres destinada à gerenciar múltiplos hosts em contêineres gerenciados por arquivos que seguem o padrão `docker-compose`.
 Utilizando ele você transforma seu VPS em um ambiente simples e rápido para deploy de aplicações.
@@ -31,7 +31,7 @@ Para fazer este processo é preciso informar o `server key`, que será validado 
 
 Depois de feitas essas configurações você vai rodar o comando:
 ```bash
-$ sm add example.com
+$ tevun add example.com
 ```
 E quando acessar no navegador verá:
 <p align="center">
