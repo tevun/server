@@ -28,7 +28,7 @@ docker-compose up -d
 echo " --- docker"
 cat "${APP}/docker-compose.yml"
 echo " "
-echo " --- git"
-echo " ~> ssh://root@<ip>/~/repo/${DOMAIN}"
+echo " --- "
+echo " ~> git remote add deploy ssh://root@<ip>${REPO}"
 echo " "
 
