@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASE=$(dirname $(readlink -f ${0}))
+BASE=$(dirname $(dirname $(readlink -f ${0})))
 DOMAIN=${1}
 REPO="${BASE}/repo/${DOMAIN}"
 APP="${BASE}/app/${DOMAIN}"
