@@ -39,7 +39,7 @@ services:
       - {domain}-mysql
     environment:
       - VIRTUAL_HOST={domain}
-      - WEB_DOCUMENT_ROOT="/var/www/app/public"
+      - WEB_DOCUMENT_ROOT="/var/www/app"
 #      - LETSENCRYPT_EMAIL=
 #      - LETSENCRYPT_HOST=
 #      - PHP_DEBUGGER="xdebug"
