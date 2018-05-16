@@ -21,25 +21,31 @@ services:
       - MYSQL_DATABASE=database
       - MYSQL_USER=user
       - MYSQL_PASSWORD=password
-    expose:
-      - 9000
 
   {domain}-app:
     image: webdevops/php-apache-dev:7.0
+#    build:
+#      dockerfile: ./.docker/app/Dockerfile
+#      context: .
     container_name: {domain}-app
+#    restart: always
     networks:
       - reverse-proxy
     volumes:
       - .:/var/www/app
+    depends_on:
+      - {domain}-mysql
+    links:
+      - {domain}-mysql
     environment:
       - VIRTUAL_HOST={domain}
       - WEB_DOCUMENT_ROOT="/var/www/app/public"
-      # - PHP_DEBUGGER="xdebug"
-      # export XDEBUG_REMOTE_HOST=$(ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
-      # - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST}
-      # - XDEBUG_REMOTE_AUTOSTART=1
-    expose:
-      - 9000
-    links:
-      - {domain}-mysql
+#      - LETSENCRYPT_EMAIL=
+#      - LETSENCRYPT_HOST=
+#      - PHP_DEBUGGER="xdebug"
+# export XDEBUG_REMOTE_HOST=$(ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
+#      - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST}
+#      - XDEBUG_REMOTE_AUTOSTART=1
+#    expose:
+#      - 9000
 
