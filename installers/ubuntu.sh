@@ -9,6 +9,9 @@ INSTALL_DOCKER_COMPOSE="$3"
 INSTALL_REBOOT="$4"
 INSTALL_LOCALE="$5"
 
+if [ "$INSTALL_USER" = '' ]; then
+  INSTALL_USER='heimdall'
+fi
 if [ "$INSTALL_DOCKER" = '' ]; then
   INSTALL_DOCKER='edge'
 fi
@@ -25,8 +28,9 @@ fi
 if [ "${INSTALL_LOCALE}" = 'yes' ]; then
   yellow "[locale] ~> Fix server locale"
   apt-get install -y language-pack-pt
-  locale-gen en_US en_US.UTF-8 pt_BR.UTF-8
+  locale-gen --purge en_US en_US.UTF-8 pt_BR.UTF-8
   dpkg-reconfigure locales
+  # echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale
 fi
 
 yellow "[1/8] ~> Install dependencies to install docker"
