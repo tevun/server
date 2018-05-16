@@ -11,17 +11,28 @@ do
     BRANCH=`echo ${ref} | cut -d/ -f3`
 done
 
-if [ -f "${APP}/docker-compose.yml" ]; then
-  cd ${APP}
+cd ${APP}
+
+if [ "$(docker ps -q -f name=${DOMAIN}-app)" ]; then
   docker-compose down
 fi
 
 cd $(dirname ${DIR_NAME})
+
 GIT_WORK_TREE="${APP}" git checkout -f ${BRANCH}
 
-if [ -f "${APP}/docker-compose.yml" ]; then
-  cd ${APP}
-  docker-compose up -d
-  sh ./scripts/install.sh
+cd ${APP}
+
+chown -R heimdall:heimdall .
+
+if [ -f ".scripts/setup.sh" ]; then
+  sh .scripts/setup.sh
 fi
 
+if [ -f "docker-compose.yml" ]; then
+  docker-compose up -d
+fi
+
+if [ -f ".scripts/install.sh" ]; then
+  sh .scripts/install.sh
+fi
