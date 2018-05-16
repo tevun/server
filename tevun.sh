@@ -22,6 +22,12 @@ case ${ACTION} in
   "password")
     sh ${DIR_NAME}/commands/utils/password.sh
   ;;
+  "requirement")
+    INSTALLER="${DIR_NAME}/installers/${2}.sh"
+    if [[ -f ${INSTALLER} ]];then
+      sh ${INSTALLER}
+    fi
+  ;;
   *)
   ;;
 esac
