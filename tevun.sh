@@ -13,11 +13,11 @@ case ${ACTION} in
   "destroy")
     sh ${DIR_NAME}/commands/destroy.sh ${2}
   ;;
-  "live")
-    sh ${DIR_NAME}/commands/live.sh ${2}
+  "start")
+    sh ${DIR_NAME}/commands/start.sh ${2}
   ;;
-  "die")
-    sh ${DIR_NAME}/commands/die.sh ${2}
+  "stop")
+    sh ${DIR_NAME}/commands/stop.sh ${2}
   ;;
   "password")
     sh ${DIR_NAME}/commands/utils/password.sh
