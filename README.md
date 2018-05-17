@@ -6,6 +6,14 @@ Utilizando ele você transforma seu VPS em um ambiente simples e rápido para de
 Para publicar uma aplicação basta executar um comando para criação de um `git remote` com um hook `post-receive` configurado para parar e subir seu projeto `docker-compose`.
 Com essa estratégia você pode instalar bancos de dados, criar volumes e manipular todo o ambiente remoto do seu servidor apenas com um comando `git push`.
 
+## Objetivo do Projeto
+
+Se você tem trabalhado no seu ambiente de desenvolvimento com Docker deve ter encontrado pelo caminho alguns desafios na hora de publicar sua aplicação no ambiente de homologação, ou mesmo em produção. Costumeiramente deve ter sido preciso publicar sua aplicação em um ambiente não homogêneo ao seu, como servidores de hospedagem, ou mesmo em VPS's onde é tudo instalado diretamente na máquina e é complicado ficar mudando as versões dos serviços. Provavelmente você precisa fazer vários acessos via ssh para poder obter as configurações necessárias.
+
+O Tevun atua justamente nesse ponto: integrar seu ambiente de desenvolvimento aos seus ambientes remotos. O processo é simples e não há nenhum milagre. Ao criar uma entrada no servidor que tem o Docker, Docker-Compose e Tevun instalados você recebe um `docker-compose.yml` básico e a URL de um repositório remoto para o Git. Quando faz um `git push` para esse **remote** um script _post-receive_, previamente configurado, no repositório se encarrega de fazer checkout do seu código para a pasta do projeto no servidor e parar e subir os containers.
+
+Sendo assim ao usar o Tevun você passa a ter um gerenciador de sites que cria os domínios e vhosts para você (inclusive com a parte do ssl - https - fornecido pelo Let's Encrypt) de forma automatizada e roda seus projetos através de seus containers. Ao fazer um `git push` ou usar `webhooks` (e incluir as devidas configurações) você pode reconfigurar tudo o que você tinha de infra no seu projeto remoto, replicando o mesmo ambiente que você tinha em desenvolvimento.
+
 ### Acompanhe
 - [Telegram](https://t.me/tevun)
 - [Twitter](https://twitter.com/tevunapp)
