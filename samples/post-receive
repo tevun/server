@@ -30,7 +30,8 @@ if [ -f ".scripts/setup.sh" ]; then
 fi
 
 if [ -f "docker-compose.yml" ]; then
-  docker-compose rm -v
+#  docker-compose rm -v -f
+  docker-compose down --remove-orphans
   docker-compose up -d
 fi
 
