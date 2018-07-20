@@ -2,7 +2,7 @@
 
 BASE=${1}
 
-mkdir ${BASE}/domains && chown 775 ${BASE}/domains
+mkdir ${BASE}/domains && chmod 775 ${BASE}/domains
 
 docker network create --driver bridge reverse-proxy
 
