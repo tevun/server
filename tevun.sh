@@ -13,14 +13,17 @@ case ${ACTION} in
   "destroy")
     sh ${DIR_NAME}/commands/destroy.sh ${2}
   ;;
-  "live")
-    sh ${DIR_NAME}/commands/live.sh ${2}
+  "up")
+    sh ${DIR_NAME}/commands/up.sh ${2}
   ;;
-  "die")
-    sh ${DIR_NAME}/commands/die.sh ${2}
+  "down")
+    sh ${DIR_NAME}/commands/down.sh ${2}
   ;;
   "password")
     sh ${DIR_NAME}/commands/utils/password.sh
+  ;;
+  "user")
+    sh ${DIR_NAME}/commands/utils/user.sh ${2}
   ;;
   "requirement")
     INSTALLER="${DIR_NAME}/installers/${2}.sh"

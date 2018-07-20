@@ -2,8 +2,8 @@
 
 BASE=$(dirname $(dirname $(readlink -f ${0})))
 DOMAIN=${1}
-REPO="${BASE}/repo/${DOMAIN}"
-APP="${BASE}/app/${DOMAIN}"
+REPO=${BASE}/${DOMAIN}/repo
+APP=${BASE}/${DOMAIN}/app
 
 cd ${APP}
 

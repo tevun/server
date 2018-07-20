@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 networks:
   reverse-proxy:
@@ -11,7 +11,7 @@ volumes:
 
 services:
   {domain}-mysql:
-    image: mysql:5.6
+    image: mysql:5.7
     container_name: {domain}-mysql
     volumes:
       - {domain}-mysql_data:/var/lib/mysql
@@ -28,7 +28,7 @@ services:
 #      dockerfile: ./.docker/app/Dockerfile
 #      context: .
     container_name: {domain}-app
-#    restart: always
+    restart: always
     networks:
       - reverse-proxy
     volumes:
@@ -39,7 +39,7 @@ services:
       - {domain}-mysql
     environment:
       - VIRTUAL_HOST={domain}
-      - WEB_DOCUMENT_ROOT="/var/www/app"
+      - WEB_DOCUMENT_ROOT="/var/www/app/public"
 #      - LETSENCRYPT_EMAIL=
 #      - LETSENCRYPT_HOST=
 #      - PHP_DEBUGGER="xdebug"

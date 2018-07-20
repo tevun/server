@@ -2,33 +2,30 @@
 
 BASE=$(dirname $(dirname $(readlink -f ${0})))
 DOMAIN=${1}
-REPO="${BASE}/repo/${DOMAIN}"
-APP="${BASE}/app/${DOMAIN}"
+SAMPLE=${2}
+REPO=${BASE}/${DOMAIN}/repo
+APP=${BASE}/${DOMAIN}/app
 
+if [[ ! ${SAMPLE} ]];then
+  SAMPLE="php"
+fi
+
+# REPO
 mkdir -p ${REPO}
-mkdir -p "${APP}/public"
-
 cd ${REPO}
-
 git init --bare
+cp ${BASE}/samples/${SAMPLE}/repo/post-receive ${REPO}/hooks/post-receive
+find ${REPO}/hooks -type f -exec sed -i "s/{domain}/${DOMAIN}/g" {} \;
+chmod +x ${REPO}/hooks/post-receive
 
-cp "${BASE}/samples/post-receive" "${REPO}/hooks/post-receive"
-cp "${BASE}/samples/docker-compose.yml" "${APP}/docker-compose.yml"
-cp "${BASE}/samples/index.html" "${APP}/public/index.html"
-
-sed -i "s/{domain}/${DOMAIN}/g" "${APP}/docker-compose.yml"
-sed -i "s/{domain}/${DOMAIN}/g" "${APP}/public/index.html"
-
-chmod +x "${REPO}/hooks/post-receive"
-
+# APP
+cp -TRv ${BASE}/samples/${SAMPLE}/ ${APP}/
 cd ${APP}
-
+find ${APP} -type f -exec sed -i "s/{domain}/${DOMAIN}/g" {} \;
 docker-compose up -d
 
-echo " --- docker"
-cat "${APP}/docker-compose.yml"
-echo " "
-echo " --- git"
+# INFO
+echo " -- "
 echo " ~> ssh://root@<ip>/~/repo/${DOMAIN}"
 echo " "
 

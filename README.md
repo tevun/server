@@ -123,6 +123,8 @@ Para gerencias os domínios você tem os seguintes comandos:
 
 - `tevun create <domain>`: Add one domain to the list of domains
 - `tevun destroy <domain>`: Remove the domain of list of domains
+- `tevun up <domain>`: Start the domain execution
+- `tevun down <domain>`: Stop the domain execution
 - `tevun live`: Make all sites available
 - `tevun die`: Stop all containers
 

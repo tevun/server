@@ -2,7 +2,7 @@
 
 BASE=$(dirname $(dirname $(readlink -f ${0})))
 DOMAIN=${1}
-APP="${BASE}/app/${DOMAIN}"
+APP=${BASE}/${DOMAIN}/app
 
 cd ${APP}
 
