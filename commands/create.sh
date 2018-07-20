@@ -10,7 +10,7 @@ DOMAINS=${BASE}/domains
 REPO=${DOMAINS}/${DOMAIN}/repo
 APP=${DOMAINS}/${DOMAIN}/app
 
-if [[ ! "${SAMPLE}" ]];then
+if [ ! "${SAMPLE}" ];then
   SAMPLE="php"
 fi
 
