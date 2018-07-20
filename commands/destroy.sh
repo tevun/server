@@ -1,9 +1,11 @@
 #!/bin/bash
 
-BASE=$(dirname $(dirname $(readlink -f ${0})))
-DOMAIN=${1}
-REPO=${BASE}/${DOMAIN}/repo
-APP=${BASE}/${DOMAIN}/app
+BASE=${1}
+DOMAIN=${2}
+DOMAINS=${BASE}/domains
+
+REPO=${DOMAINS}/${DOMAIN}/repo
+APP=${DOMAINS}/${DOMAIN}/app
 
 cd ${APP}
 
