@@ -1,5 +1,10 @@
 #!/bin/bash
 
+BASE=${1}
+
+mkdir ${BASE}/domains
+chwon 775 ${BASE}/domains
+
 docker network create --driver bridge reverse-proxy
 
 docker run -d -p 80:80 -p 443:443 \
