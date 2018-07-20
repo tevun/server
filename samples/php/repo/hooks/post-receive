@@ -3,7 +3,7 @@
 DIR_NAME=$(dirname $(readlink -f ${0}))
 BASE=$(dirname $(readlink -f "${DIR_NAME}/../.."))
 DOMAIN="{domain}"
-APP="${BASE}/app/${DOMAIN}"
+APP=${BASE}/${DOMAIN}/app
 BRANCH="master"
 
 # hook pre-checkout
