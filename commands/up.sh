@@ -7,4 +7,3 @@ APP=${BASE}/${DOMAIN}/app
 cd ${APP}
 
 docker-compose up -d
-

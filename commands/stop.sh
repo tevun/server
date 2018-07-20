@@ -6,4 +6,4 @@ APP=${BASE}/${DOMAIN}/app
 
 cd ${APP}
 
-docker-compose down
+docker-compose stop

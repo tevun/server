@@ -13,6 +13,12 @@ case ${ACTION} in
   "destroy")
     sh ${DIR_NAME}/commands/destroy.sh ${2}
   ;;
+  "start")
+    sh ${DIR_NAME}/commands/start.sh ${2}
+  ;;
+  "stop")
+    sh ${DIR_NAME}/commands/stop.sh ${2}
+  ;;
   "up")
     sh ${DIR_NAME}/commands/up.sh ${2}
   ;;

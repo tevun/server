@@ -14,7 +14,7 @@ fi
 mkdir -p ${REPO}
 cd ${REPO}
 git init --bare
-cp ${BASE}/samples/${SAMPLE}/repo/post-receive ${REPO}/hooks/post-receive
+cp -TRv ${BASE}/samples/${SAMPLE}/repo/ ${REPO}/hooks/
 find ${REPO}/hooks -type f -exec sed -i "s/{domain}/${DOMAIN}/g" {} \;
 chmod +x ${REPO}/hooks/post-receive
 
@@ -26,6 +26,6 @@ docker-compose up -d
 
 # INFO
 echo " -- "
-echo " ~> ssh://root@<ip>/~/repo/${DOMAIN}"
+echo " ~> git remote add deploy ssh://root@<ip>${REPO}"
 echo " "
 
