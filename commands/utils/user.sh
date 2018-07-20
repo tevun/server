@@ -10,6 +10,7 @@ if [ "$EXISTS" = '0' ]; then
   cp ~/.ssh/authorized_keys /home/${INSTALL_USER}/.ssh/
   chmod 755 /home/${INSTALL_USER}/.ssh/authorized_keys
   chown -R ${INSTALL_USER}:${INSTALL_USER} /home/${INSTALL_USER}
+  echo "deploy ALL=(ALL) ALL" > /etc/sudoers.d/deploy
 fi
 
 echo "[2/3] ~> Configure ssh"
