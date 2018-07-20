@@ -31,6 +31,9 @@ case ${ACTION} in
   "user")
     sh ${DIR_NAME}/commands/utils/user.sh ${2}
   ;;
+  "ubuntu/locale")
+    sh ${DIR_NAME}/commands/utils/ubuntu/locale.sh
+  ;;
   "requirement")
     INSTALLER="${DIR_NAME}/installers/${2}.sh"
     if [[ -f ${INSTALLER} ]];then

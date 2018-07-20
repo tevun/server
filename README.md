@@ -123,14 +123,17 @@ Caso não tenha você pode ver se o seu sistema é compatível com algum dos nos
 Dê uma olha [nesta pasta](https://github.com/brasil-php/tevun/tree/master/installers) para ver se encontra seu sitema na lista.
 Obtenha Mais informações sobre uso do nossos instaladores [aqui](https://github.com/brasil-php/tevun#instalação-de-requisitos).
 
-Para rodar o projeto em suas versões iniciais é preciso fazer os passos abaixo.
-
-```
-$ git clone https://github.com/brasil-php/tevun.git
-$ cd tevun
-$ rm -rf .git/
-$ sudo ln -s $(pwd)/tevun.sh /usr/local/bin/tevun
-$ tevun setup
+Para instalar o projeto em suas versões iniciais é preciso fazer os passos abaixo:
+##### Instalação
+```bash
+# mkdir -p /usr/share/tevun/bin
+# cd /usr/share/tevun/bin 
+# git clone https://github.com/brasil-php/tevun.git .
+# ln -s $(pwd)/tevun.sh /usr/local/bin/tevun
+# tevun password
+# passwd
+# tevun user {user}
+# tevun ubuntu/locale
 ```
 
 #### Gerenciando os Domínios

@@ -6,7 +6,7 @@ SAMPLE=${2}
 REPO=${BASE}/${DOMAIN}/repo
 APP=${BASE}/${DOMAIN}/app
 
-if [[ ! ${SAMPLE} ]];then
+if [[ ! "${SAMPLE}" ]];then
   SAMPLE="php"
 fi
 
