@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASE=${1}
+BASE=${1}/domains
 DOMAIN=${2}
 SAMPLE=${3}
 REPO=${BASE}/${DOMAIN}/repo
