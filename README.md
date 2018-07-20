@@ -124,16 +124,30 @@ Dê uma olha [nesta pasta](https://github.com/brasil-php/tevun/tree/master/insta
 Obtenha Mais informações sobre uso do nossos instaladores [aqui](https://github.com/brasil-php/tevun#instalação-de-requisitos).
 
 Para instalar o projeto em suas versões iniciais é preciso fazer os passos abaixo:
+
 ##### Instalação
-```bash
+
+Instale o tevun no seu servidor
+```
+$ ssh root@<ip>
 # mkdir -p /usr/share/tevun/bin
 # cd /usr/share/tevun/bin 
 # git clone https://github.com/brasil-php/tevun.git .
 # ln -s $(pwd)/tevun.sh /usr/local/bin/tevun
-# tevun password
-# passwd
+```
+
+Configure as credenciais adequadamente
+```
+# tevun password (gere uma senha para usar adiante)
+# passwd [opcional] (use para ter uma senha do seu root para usar como SU)
 # tevun user {user}
-# tevun ubuntu/locale
+```
+
+Reinicie seu servidor e entre com o usuário sem privilégios
+```
+# tevun ubuntu/locale [opcional] (use para configurar o locale do Ubuntu)
+# reboot
+$ ssh {user}@<ip>
 ```
 
 #### Gerenciando os Domínios

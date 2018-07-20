@@ -1,8 +1,8 @@
 #!/bin/bash
 
-BASE=$(dirname $(dirname $(readlink -f ${0})))
-DOMAIN=${1}
-SAMPLE=${2}
+BASE=${1}
+DOMAIN=${2}
+SAMPLE=${3}
 REPO=${BASE}/${DOMAIN}/repo
 APP=${BASE}/${DOMAIN}/app
 
