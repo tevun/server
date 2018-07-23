@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-INSTALL_USER=${1}
+INSTALL_USER=${2}
 
 echo "[1/3] ~> Create '${INSTALL_USER}'"
 EXISTS=$(grep -c ^${INSTALL_USER}: /etc/passwd)
