@@ -143,11 +143,12 @@ Configure as credenciais adequadamente
 # tevun user {user}
 ```
 
-Reinicie seu servidor e entre com o usuário sem privilégios
+Reinicie seu servidor e entre com o usuário sem privilégios para fazer o setup do Tevun
 ```
 # tevun ubuntu/locale [opcional] (use para configurar o locale do Ubuntu)
 # reboot
 $ ssh {user}@<ip>
+$ sudo tevun setup
 ```
 
 #### Gerenciando os Domínios
