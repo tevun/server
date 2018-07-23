@@ -20,5 +20,6 @@ if [ "$EXISTS" = '0' ]; then
   service ssh reload
 fi
 
-echo "[3/3] ~> Add '${INSTALL_USER}' to docker group"
+echo "[3/3] ~> Add '${INSTALL_USER}' to docker and root groups"
 usermod -aG docker ${INSTALL_USER}
+usermod -aG root ${INSTALL_USER}
