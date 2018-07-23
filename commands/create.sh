@@ -4,7 +4,7 @@ BASE=${1}
 DOMAIN=${2}
 SAMPLE=${3}
 
-SAMPLES=${BASE}/samples
+SAMPLES=${BASE}/bin/samples
 DOMAINS=${BASE}/domains
 
 REPO=${DOMAINS}/${DOMAIN}/repo
