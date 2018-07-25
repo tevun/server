@@ -10,6 +10,8 @@ APP=${DOMAINS}/${DOMAIN}/app
 
 cd ${APP}
 
-docker-compose down
+if [ -f "./docker-compose.yml" ]; then
+  docker-compose down
+fi
 
 rm -rf ${DOMAINS}/${DOMAIN}
