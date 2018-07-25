@@ -14,21 +14,27 @@ if [ ! "${SAMPLE}" ];then
   SAMPLE="php"
 fi
 
-# REPO
+# CREATE REPO
 mkdir -p ${REPO}
 cd ${REPO}
 git init --bare
+
+# CREATE APP
+mkdir -p ${APP}
+cd ${APP}
+git init && git remote add origin ${REPO}
+git commit --allow-empty -m "Init" && git push origin master
+
+# CONFIGURE REPO
 cp -TRv ${SAMPLES}/${SAMPLE}/repo/ ${REPO}/
 find ${REPO}/hooks -type f -exec sed -i "s/{domain}/${DOMAIN}/g" {} \;
 chmod +x ${REPO}/hooks/post-receive
 
-# APP
+# CONFIGURE APP
 cp -TRv ${SAMPLES}/${SAMPLE}/app/ ${APP}/
-cd ${APP}
 find ${APP} -type f -exec sed -i "s/{domain}/${DOMAIN}/g" {} \;
 
-git init && git remote add origin ${REPO}
-git commit --allow-empty -m "Init" && git push origin master
+# INIT APP
 git checkout -b setup
 git add --all && git commit --allow-empty -m "Setup" && git push origin setup --force
 rm -rf ${APP}/.git
