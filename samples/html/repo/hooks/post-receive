@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+DIR_NAME=$(dirname $(readlink -f ${0}))
+BASE=$(dirname $(readlink -f "${DIR_NAME}/../.."))
+DOMAIN="{domain}"
+APP=${BASE}/${DOMAIN}/app
+BRANCH="master"
+
+# hook pre-checkout
+cd ${APP}
+if [ -f ".tevun/pre-checkout.sh" ]; then
+  sh .tevun/hooks/pre-checkout.sh ${DOMAIN}
+fi
+
+cd $(dirname ${DIR_NAME})
+
+GIT_WORK_TREE="${APP}" git checkout -f ${BRANCH}
+
+# hook post-checkout
+cd ${APP}
+if [ -f ".tevun/post-checkout.sh" ]; then
+  sh .tevun/hooks/post-checkout.sh ${DOMAIN}
+fi
+
+# hook install
+if [ -f ".tevun/install.sh" ]; then
+  sh .tevun/hooks/install.sh
+fi

@@ -1,0 +1,25 @@
+version: '3'
+
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy
+
+services:
+  {domain}-app:
+    image: lyseontech/php-apache-dev:latest
+#    build:
+#      dockerfile: ./.docker/app/Dockerfile
+#      context: .
+    container_name: {domain}-app
+    restart: always
+    networks:
+      - reverse-proxy
+    volumes:
+      - .:/var/www/app
+    environment:
+      - VIRTUAL_HOST={domain}
+      - WEB_DOCUMENT_ROOT="/var/www/app/public"
+#      - LETSENCRYPT_EMAIL=
+#      - LETSENCRYPT_HOST=
+

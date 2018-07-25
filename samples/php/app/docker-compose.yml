@@ -11,7 +11,7 @@ volumes:
 
 services:
   {domain}-mysql:
-    image: mysql:5.7
+    image: lyseontech/mysql:latest
     container_name: {domain}-mysql
     volumes:
       - {domain}-mysql_data:/var/lib/mysql
@@ -23,7 +23,7 @@ services:
       - MYSQL_PASSWORD=password
 
   {domain}-app:
-    image: webdevops/php-apache-dev:7.0
+    image: lyseontech/php-apache-dev:latest
 #    build:
 #      dockerfile: ./.docker/app/Dockerfile
 #      context: .
