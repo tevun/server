@@ -12,6 +12,4 @@ cd ${APP}
 
 docker-compose down
 
-rm -rf ${REPO}
-rm -rf ${APP}
-
+rm -rf ${DOMAINS}/${DOMAIN}
