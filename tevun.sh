@@ -26,6 +26,9 @@ case ${ACTION} in
   "down")
     sh ${TEVUN_DIR_BIN}/commands/down.sh ${TEVUN_DIR_BASE} ${2}
   ;;
+  "domains")
+    sh ${TEVUN_DIR_BIN}/commands/domains.sh ${TEVUN_DIR_BASE}
+  ;;
   "password")
     sh ${TEVUN_DIR_BIN}/commands/utils/password.sh ${TEVUN_DIR_BASE}
   ;;
