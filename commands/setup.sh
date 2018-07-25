@@ -2,7 +2,7 @@
 
 BASE=${1}
 
-mkdir ${BASE}/domains\
+mkdir -p ${BASE}/domains\
   && chmod 755 ${BASE}/domains\
   && chown 1000:docker ${BASE}/domains
 

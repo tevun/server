@@ -30,6 +30,6 @@ docker-compose up -d
 
 # INFO
 echo " -- "
-echo " ~> git remote add deploy ssh://root@<ip>${REPO}"
+echo " ~> git remote add deploy ssh://<user>@<ip>/domains/${DOMAIN}/repo"
 echo " "
 
