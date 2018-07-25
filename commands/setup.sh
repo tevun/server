@@ -2,9 +2,13 @@
 
 BASE=${1}
 
+git config --global user.email "setup@tevun.com"
+git config --global user.name "Tevun Setup"
+
 mkdir -p ${BASE}/domains\
   && chmod 755 ${BASE}/domains\
-  && chown 1000:docker ${BASE}/domains
+  && chown 1000:docker ${BASE}/domains\
+  && ln -s ${BASE}/domains /domains
 
 docker network create --driver bridge reverse-proxy
 

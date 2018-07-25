@@ -26,7 +26,15 @@ chmod +x ${REPO}/hooks/post-receive
 cp -TRv ${SAMPLES}/${SAMPLE}/app/ ${APP}/
 cd ${APP}
 find ${APP} -type f -exec sed -i "s/{domain}/${DOMAIN}/g" {} \;
-docker-compose up -d
+if [[ -f docker-compose.yml ]]; then
+  docker-compose up -d
+fi
+
+git init && git remote add origin ${REPO}
+# git commit --allow-empty -m "Init" && git push origin master
+git checkout -b setup
+git add --all && git commit --allow-empty -m "Setup" && git push origin setup --force
+rm -r ${APP}/.git
 
 # INFO
 echo " -- "
