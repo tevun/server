@@ -35,6 +35,9 @@ case ${ACTION} in
   "ubuntu/locale")
     sh ${TEVUN_DIR_BIN}/commands/utils/ubuntu/locale.sh ${TEVUN_DIR_BASE}
   ;;
+  "ps")
+    sh ${TEVUN_DIR_BIN}/commands/utils/ps.sh ${TEVUN_DIR_BASE}
+  ;;
   "requirement")
     INSTALLER="${TEVUN_DIR_BIN}/installers/${2}.sh"
     if [[ -f ${INSTALLER} ]];then
