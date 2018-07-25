@@ -6,9 +6,19 @@ DOMAIN="{domain}"
 APP=${BASE}/${DOMAIN}/app
 BRANCH="master"
 
-# hook pre-checkout
 cd ${APP}
-if [ -f ".tevun/pre-checkout.sh" ]; then
+
+# hook setup
+if [ -f ".tevun/hooks/setup.sh" ]; then
+  READY=$(echo ${DOMAIN} | md5sum)
+  if [ ! -f ".${READY}" ]; then
+    sh .tevun/hooks/setup.sh
+  fi
+  touch ".${READY}"
+fi
+
+# hook pre-checkout
+if [ -f ".tevun/hooks/pre-checkout.sh" ]; then
   sh .tevun/hooks/pre-checkout.sh ${DOMAIN}
 fi
 
@@ -18,11 +28,11 @@ GIT_WORK_TREE="${APP}" git checkout -f ${BRANCH}
 
 # hook post-checkout
 cd ${APP}
-if [ -f ".tevun/post-checkout.sh" ]; then
+if [ -f ".tevun/hooks/post-checkout.sh" ]; then
   sh .tevun/hooks/post-checkout.sh ${DOMAIN}
 fi
 
 # hook install
-if [ -f ".tevun/install.sh" ]; then
+if [ -f ".tevun/hooks/install.sh" ]; then
   sh .tevun/hooks/install.sh
 fi
