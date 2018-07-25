@@ -4,7 +4,7 @@ BASE=${1}
 DOMAIN=${2}
 SAMPLE=${3}
 
-SAMPLES=${BASE}/samples
+SAMPLES=${BASE}/bin/samples
 DOMAINS=${BASE}/domains
 
 REPO=${DOMAINS}/${DOMAIN}/repo
@@ -18,7 +18,7 @@ fi
 mkdir -p ${REPO}
 cd ${REPO}
 git init --bare
-cp -TRv ${SAMPLES}/${SAMPLE}/repo/ ${REPO}/hooks/
+cp -TRv ${SAMPLES}/${SAMPLE}/repo/ ${REPO}/
 find ${REPO}/hooks -type f -exec sed -i "s/{domain}/${DOMAIN}/g" {} \;
 chmod +x ${REPO}/hooks/post-receive
 
