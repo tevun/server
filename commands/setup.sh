@@ -25,6 +25,7 @@ fi
 
 OLD_CONTAINER=$(docker ps -a -q -f name=nginx-proxy)
 if [ "${OLD_CONTAINER}" ]; then
+  docker stop ${OLD_CONTAINER}
   docker rm ${OLD_CONTAINER}
 fi
 docker run -d -p 80:80 -p 443:443 \
@@ -40,6 +41,7 @@ docker run -d -p 80:80 -p 443:443 \
 
 OLD_CONTAINER=$(docker ps -a -q -f name=nginx-letsencrypt)
 if [ "${OLD_CONTAINER}" ]; then
+  docker stop ${OLD_CONTAINER}
   docker rm ${OLD_CONTAINER}
 fi
 docker run -d \
