@@ -12,9 +12,11 @@ git config --global user.name "Tevun Setup"
 if [ ! -d "${BASE}/domains}" ];then
   mkdir -p ${BASE}/domains
 fi
+
 chmod 755 ${BASE}/domains
 chown ${TEVUN_USER}:docker ${BASE}/domains
-if [ ! -h "/domains}" ];then
+
+if [ ! -L "/domains}" ];then
   ln -s ${BASE}/domains /domains
 fi
 
