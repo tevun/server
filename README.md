@@ -1,5 +1,14 @@
 # Tevun ~ WIP
 
+### Disclaimer
+----
+> No momento não há ainda como fazer os procedimentos abaixo.
+> 
+> Para entender o estado do projeto atualmente clique [aqui](https://github.com/brasil-php/tevun#versões-iniciais) 
+----
+
+# O Projeto
+
 Este projeto é uma API para gerenciamento de contêineres destinada à gerenciar múltiplos hosts em contêineres gerenciados por arquivos que seguem o padrão `docker-compose`.
 Utilizando ele você transforma seu VPS em um ambiente simples e rápido para deploy de aplicações.
 
@@ -18,14 +27,6 @@ Sendo assim ao usar o Tevun você passa a ter um gerenciador de sites que cria o
 - [Telegram](https://t.me/tevun)
 - [Twitter](https://twitter.com/tevunapp)
 - [Site](https://tevun.com)
-
-
-### Disclaimer
-----
-> No momento não há ainda como fazer os procedimentos abaixo.
-> 
-> Para entender o estado do projeto atualmente clique [aqui](https://github.com/brasil-php/tevun#versões-iniciais) 
-----
 
 ## Como isso funciona?
 
