@@ -12,7 +12,7 @@
 ----
 > No momento não há ainda como fazer os procedimentos abaixo.
 > 
-> Para entender o estado do projeto atualmente clique [aqui](https://github.com/brasil-php/tevun#versões-iniciais) 
+> Para entender o estado do projeto atualmente clique [aqui](https://github.com/tevun/server#versões-iniciais) 
 ----
 
 # O Projeto
