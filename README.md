@@ -1,3 +1,11 @@
+<p align="center">
+  <img
+    src="https://raw.githubusercontent.com/tevun/server/master/badge.png"
+    height="150px"
+    alt="logo"
+  />
+</p>
+
 # Tevun ~ WIP
 
 ### Disclaimer
