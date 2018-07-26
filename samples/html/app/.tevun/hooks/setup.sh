@@ -2,5 +2,5 @@
 
 #cd ${1}
 
-#cp .env.deploy .env
-#cp docker-compose.yml.deploy docker-compose.yml
+cp .env.stage .env
+cp docker-compose.yml.stage docker-compose.yml

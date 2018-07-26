@@ -15,11 +15,12 @@ fi
 
 # hook setup
 if [ -f ".tevun/hooks/setup.sh" ]; then
-  READY=$(echo ${DOMAIN} | md5sum)
-  if [ ! -f ".${READY}" ]; then
+  #READY=$(echo ${DOMAIN} | md5sum)
+  READY=.ready
+  if [ ! -f ".ready" ]; then
     sh .tevun/hooks/setup.sh ${APP} ${DOMAIN}
   fi
-  touch ".${READY}"
+  touch ".ready"
 fi
 
 cd $(dirname ${DIR_NAME})

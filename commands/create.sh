@@ -44,6 +44,7 @@ sh ${SAMPLES}/${SAMPLE}/configure.sh ${APP}
 # INIT APP
 git push origin setup --force
 rm -rf ${APP}/.git
+rm ${APP}/.ready
 
 # INFO
 echo " -- "
