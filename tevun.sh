@@ -6,7 +6,7 @@ TEVUN_DIR_BASE=$(dirname ${TEVUN_DIR_BIN})
 
 case ${ACTION} in
   "setup")
-    sh ${TEVUN_DIR_BIN}/commands/setup.sh ${TEVUN_DIR_BASE}
+    sh ${TEVUN_DIR_BIN}/commands/setup.sh ${TEVUN_DIR_BASE} ${2}
   ;;
   "create")
     sh ${TEVUN_DIR_BIN}/commands/create.sh ${TEVUN_DIR_BASE} ${2} ${3}

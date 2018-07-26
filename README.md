@@ -148,7 +148,17 @@ Reinicie seu servidor e entre com o usuário sem privilégios para fazer o setup
 # tevun ubuntu/locale [opcional] (use para configurar o locale do Ubuntu)
 # reboot
 $ ssh {user}@<ip>
-$ sudo tevun setup
+$ sudo tevun setup {user}
+```
+
+##### Configurando o projeto
+
+```
+$ git remote add deploy ssh://<user>@<ip>/domains/<domain>/repo
+$ git fetch deploy +refs/heads/setup:refs/remotes/deploy/setup
+$ git branch --no-track setup refs/remotes/deploy/setup
+$ git branch --set-upstream-to=deploy/setup setup
+$ git merge --no-ff deploy/setup --allow-unrelated-histories 
 ```
 
 #### Gerenciando os Domínios

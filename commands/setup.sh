@@ -1,17 +1,28 @@
 #!/bin/bash
 
 BASE=${1}
+TEVUN_USER=1000
+if [ "${2}" ]; then
+  TEVUN_USER=${2}
+fi
 
 git config --global user.email "setup@tevun.com"
 git config --global user.name "Tevun Setup"
 
 mkdir -p ${BASE}/domains\
   && chmod 755 ${BASE}/domains\
-  && chown 1000:docker ${BASE}/domains\
+  && chown ${TEVUN_USER}:docker ${BASE}/domains\
   && ln -s ${BASE}/domains /domains
 
-docker network create --driver bridge reverse-proxy
+NETWORK_EXISTS=$(docker network ls -q -f name=reverse-proxy)
+if [[ ! ${NETWORK_EXISTS} ]];then
+  docker network create --driver bridge reverse-proxy
+fi
 
+OLD_CONTAINER=$(docker ps -q -f name=nginx-proxy)
+if [[ ${OLD_CONTAINER} ]]; then
+  docker rm ${OLD_CONTAINER}
+fi
 docker run -d -p 80:80 -p 443:443 \
     --name nginx-proxy \
     --net reverse-proxy \
@@ -23,6 +34,10 @@ docker run -d -p 80:80 -p 443:443 \
     --label com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true \
     jwilder/nginx-proxy
 
+OLD_CONTAINER=$(docker ps -q -f name=nginx-letsencrypt)
+if [[ ${OLD_CONTAINER} ]]; then
+  docker rm ${OLD_CONTAINER}
+fi
 docker run -d \
     --name nginx-letsencrypt \
     --net reverse-proxy \
