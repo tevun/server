@@ -6,4 +6,4 @@ if [ "$(docker ps -q -f name=${1}-app)" ]; then
   docker-compose down
 fi
 
-rm -rf ./*
+# rm -rf ./*
