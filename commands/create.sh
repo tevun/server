@@ -39,6 +39,9 @@ git checkout -b setup
 git add --all && git commit --allow-empty -m "Setup" && git push origin setup --force
 rm -rf ${APP}/.git
 
+# CONFIGURE SAMPLE
+sh ${SAMPLES}/${SAMPLE}/configure.sh ${APP}
+
 # INFO
 echo " -- "
 echo " ~> git remote add deploy ssh://<user>@<ip>/domains/${DOMAIN}/repo"
