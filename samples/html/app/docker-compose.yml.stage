@@ -5,10 +5,6 @@ networks:
     external:
       name: reverse-proxy
 
-volumes:
-  {domain}-mysql_data:
-    driver: local
-
 services:
   {domain}-app:
     image: lyseontech/php-apache-dev:v7.3
