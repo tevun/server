@@ -8,6 +8,11 @@ BRANCH="master"
 
 cd ${APP}
 
+# hook pre-checkout
+if [ -f ".tevun/hooks/pre-checkout.sh" ]; then
+  sh .tevun/hooks/pre-checkout.sh ${APP} ${DOMAIN}
+fi
+
 # hook setup
 if [ -f ".tevun/hooks/setup.sh" ]; then
   READY=$(echo ${DOMAIN} | md5sum)
@@ -15,11 +20,6 @@ if [ -f ".tevun/hooks/setup.sh" ]; then
     sh .tevun/hooks/setup.sh ${APP} ${DOMAIN}
   fi
   touch ".${READY}"
-fi
-
-# hook pre-checkout
-if [ -f ".tevun/hooks/pre-checkout.sh" ]; then
-  sh .tevun/hooks/pre-checkout.sh ${APP} ${DOMAIN}
 fi
 
 cd $(dirname ${DIR_NAME})
