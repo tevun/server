@@ -23,7 +23,7 @@ if [ ! "${NETWORK_EXISTS}" ];then
   docker network create --driver bridge reverse-proxy
 fi
 
-OLD_CONTAINER=$(docker ps -q -f name=nginx-proxy)
+OLD_CONTAINER=$(docker ps -a -q -f name=nginx-proxy)
 if [ "${OLD_CONTAINER}" ]; then
   docker rm ${OLD_CONTAINER}
 fi
@@ -38,7 +38,7 @@ docker run -d -p 80:80 -p 443:443 \
     --label com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true \
     jwilder/nginx-proxy
 
-OLD_CONTAINER=$(docker ps -q -f name=nginx-letsencrypt)
+OLD_CONTAINER=$(docker ps -a -q -f name=nginx-letsencrypt)
 if [ "${OLD_CONTAINER}" ]; then
   docker rm ${OLD_CONTAINER}
 fi
