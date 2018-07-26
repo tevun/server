@@ -54,5 +54,50 @@ case ${ACTION} in
     fi
   ;;
   *)
+    echo "Usage: tevun COMMAND"
+    echo ""
+    echo "A domain container agile"
+    echo ""
+    echo "Administrative Commands:"
+    echo "setup                 Start usage server"
+    echo "password              Generate a random password"
+    echo "user                  Create a user"
+    echo "ps                    Show running containers"
+    echo "domains               List the domains folder"
+
+    echo ""
+    echo "Domain Management Commands:"
+    echo "create                Create domain"
+    echo "destroy               Destroy domain"
+    echo "start                 Apply start on domain"
+    echo "stop                  Apply stop on domain"
+    echo "up                    Apply up on domain"
+    echo "down                  Apply up on domain"
+
+    echo ""
+    echo "Util Commands:"
+    echo "ubuntu/locale         Fix locale on Ubuntu Server"
+    echo "lets-encrypt/renew    Force renew certificates"
+    echo "lets-encrypt/status   Show certificate status"
+    echo "requirement {distro}  Install requirements to your distro [ubuntu, debian, etc]"
+    echo ""
   ;;
 esac
+
+function __tevun
+{
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts="setup password user ps domains \
+          create destroy start stop up down \
+          ubuntu/locale lets-encrypt/renew lets-encrypt/status requirement \
+          help"
+    if [[ ${cur} == * ]] ; then
+        COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+        return 0
+    fi
+}
+
+complete __tevun tevun
