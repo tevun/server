@@ -23,9 +23,9 @@ services:
       - .:/var/www/app
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USERNAME}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=database
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
 
   {domain}-app:
     image: lyseontech/php-apache-dev:v7.3

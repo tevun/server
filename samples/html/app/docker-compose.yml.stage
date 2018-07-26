@@ -4,31 +4,14 @@ networks:
   reverse-proxy:
     external:
       name: reverse-proxy
-  internal:
-    driver: bridge
 
 volumes:
   {domain}-mysql_data:
     driver: local
 
 services:
-  {domain}-mysql:
-    image: lyseontech/mysql:v5.7
-    container_name: {domain}-mysql
-    restart: always
-    networks:
-      - internal
-    volumes:
-      - {domain}-mysql_data:/var/lib/mysql
-      - .:/var/www/app
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USERNAME}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-
   {domain}-app:
-    image: lyseontech/php-apache-dev:latest
+    image: lyseontech/php-apache-dev:v7.3
 #    build:
 #      dockerfile: ./.docker/app/Dockerfile
 #      context: .
@@ -38,10 +21,6 @@ services:
       - reverse-proxy
     volumes:
       - .:/var/www/app
-    depends_on:
-      - {domain}-mysql
-    links:
-      - {domain}-mysql
     environment:
       - VIRTUAL_HOST={domain}
       - WEB_DOCUMENT_ROOT="/var/www/app/public"
