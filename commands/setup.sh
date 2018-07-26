@@ -14,7 +14,7 @@ if [ ! -d "${BASE}/domains}" ];then
 fi
 chmod 755 ${BASE}/domains
 chown ${TEVUN_USER}:docker ${BASE}/domains
-if [ ! -L "/domains}" ];then
+if [ ! -h "/domains}" ];then
   ln -s ${BASE}/domains /domains
 fi
 
