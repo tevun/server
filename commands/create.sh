@@ -34,13 +34,16 @@ chmod +x ${REPO}/hooks/post-receive
 cp -TRv ${SAMPLES}/${SAMPLE}/app/ ${APP}/
 find ${APP} -type f -exec sed -i "s/{domain}/${DOMAIN}/g" {} \;
 
-# INIT APP
+# PREPARE APP
 git checkout -b setup
-git add --all && git commit --allow-empty -m "Setup" && git push origin setup --force
-rm -rf ${APP}/.git
+git add --all && git commit --allow-empty -m "Setup"
 
 # CONFIGURE SAMPLE
 sh ${SAMPLES}/${SAMPLE}/configure.sh ${APP}
+
+# INIT APP
+git push origin setup --force
+rm -rf ${APP}/.git
 
 # INFO
 echo " -- "
