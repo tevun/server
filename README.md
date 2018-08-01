@@ -141,7 +141,7 @@ Instale o tevun no seu servidor
 $ ssh root@<ip>
 # mkdir -p /usr/share/tevun/bin
 # cd /usr/share/tevun/bin 
-# git clone https://github.com/brasil-php/tevun.git .
+# git clone https://github.com/tevun/server.git .
 # ln -s $(pwd)/tevun.sh /usr/local/bin/tevun
 ```
 
