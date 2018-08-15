@@ -45,7 +45,7 @@ Depois de instalado ele irá disponibilizar para você um conjunto de comandos e
 A topologia do projeto é semelhante à imagem abaixo.
 <p align="center">
   <img 
-    src="https://github.com/brasil-php/tevun/raw/master/images/topology.jpg" 
+    src="https://github.com/tevun/server/raw/master/images/topology.jpg" 
     alt="Pairing"
   >
 </p>
@@ -54,7 +54,7 @@ Para garantir a identidade do cliente é preciso pareá-lo antes de rodar os pri
 Para fazer este processo é preciso informar o `server key`, que será validado para ativação do cliente que fez o pedido como apto a se comunicar com o servidor.
 <p align="center">
   <img 
-    src="https://github.com/brasil-php/tevun/raw/master/images/pair.jpg" 
+    src="https://github.com/tevun/server/raw/master/images/pair.jpg" 
     alt="Pairing"
   >
 </p>
@@ -68,7 +68,7 @@ $ tevun add example.com
 E quando acessar no navegador verá:
 <p align="center">
   <img 
-    src="https://github.com/brasil-php/tevun/raw/master/images/works.png" 
+    src="https://github.com/tevun/server/raw/master/images/works.png" 
     alt="Pairing"
   >
 </p>
@@ -78,7 +78,7 @@ Da mesma forma você pode usar o CLI para remover o domínio
 $ tevun rm example.com
 ```
 
-Você pode ver os arquivos que são gerados para esse setup inicial [aqui](https://github.com/brasil-php/tevun/tree/master/samples)
+Você pode ver os arquivos que são gerados para esse setup inicial [aqui](https://github.com/tevun/server/tree/master/samples)
 
 ### O Servidor
 
@@ -129,8 +129,8 @@ Nestas versões iniciais ainda não temos vários recursos disponíveis, como a 
  
 Como requisitos para rodar o projeto você precisa ter o `docker` e o `docker-compose` instalados.
 Caso não tenha você pode ver se o seu sistema é compatível com algum dos nossos instaladores disponíveis.
-Dê uma olha [nesta pasta](https://github.com/brasil-php/tevun/tree/master/installers) para ver se encontra seu sitema na lista.
-Obtenha Mais informações sobre uso do nossos instaladores [aqui](https://github.com/brasil-php/tevun#instalação-de-requisitos).
+Dê uma olha [nesta pasta](https://github.com/tevun/server/tree/master/installers) para ver se encontra seu sitema na lista.
+Obtenha Mais informações sobre uso do nossos instaladores [aqui](https://github.com/tevun/server#instalação-de-requisitos).
 
 Para instalar o projeto em suas versões iniciais é preciso fazer os passos abaixo:
 
