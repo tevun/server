@@ -160,16 +160,6 @@ $ ssh {user}@<ip>
 $ sudo tevun setup {user}
 ```
 
-##### Configurando o projeto
-
-```
-$ git remote add deploy ssh://<user>@<ip>/domains/<domain>/repo
-$ git fetch deploy +refs/heads/setup:refs/remotes/deploy/setup
-$ git branch --no-track setup refs/remotes/deploy/setup
-$ git branch --set-upstream-to=deploy/setup setup
-$ git merge --no-ff deploy/setup --allow-unrelated-histories 
-```
-
 #### Gerenciando os Domínios
 
 Para gerencias os domínios você tem os seguintes comandos:
@@ -182,6 +172,16 @@ Para gerencias os domínios você tem os seguintes comandos:
 - `tevun down <domain>`: Puts the domain down
 - `tevun live`: Make all sites available
 - `tevun die`: Stop all containers
+
+##### Configurando o projeto
+
+```
+$ git remote add deploy ssh://<user>@<ip>/domains/<domain>/repo
+$ git fetch deploy +refs/heads/setup:refs/remotes/deploy/setup
+$ git branch --no-track setup refs/remotes/deploy/setup
+$ git branch --set-upstream-to=deploy/setup setup
+$ git merge --no-ff deploy/setup --allow-unrelated-histories 
+```
 
 ### Instalação de Requisitos
 
