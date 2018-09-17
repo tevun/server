@@ -164,7 +164,7 @@ $ sudo tevun setup {user}
 
 Para gerencias os domínios você tem os seguintes comandos:
 
-- `tevun create <domain>`: Add one domain to the list of domains
+- `tevun create <domain> [<template>]`: Add one domain to the list of domains. The template default is `php`, but you can use `html` or add others
 - `tevun destroy <domain>`: Remove the domain of list of domains
 - `tevun start <domain>`: Start the domain execution
 - `tevun stop <domain>`: Stop the domain execution
