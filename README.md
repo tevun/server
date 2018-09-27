@@ -17,7 +17,7 @@
 
 # O Projeto
 
-Este projeto é uma API para gerenciamento de contêineres destinada à gerenciar múltiplos hosts em contêineres gerenciados por arquivos que seguem o padrão `docker-compose`.
+Este projeto é uma API para gerenciamento de domínios destinada à gerenciar múltiplos hosts em contêineres gerenciados por arquivos que seguem o padrão "docker-compose".
 Utilizando ele você transforma seu VPS em um ambiente simples e rápido para deploy de aplicações.
 
 Para publicar uma aplicação basta executar um comando para criação de um `git remote` com um hook `post-receive` configurado para parar e subir seu projeto `docker-compose`.
