@@ -40,6 +40,7 @@ docker run -d -p 80:80 -p 443:443 \
     -v /usr/share/nginx/html \
     -v /var/run/docker.sock:/tmp/docker.sock:ro \
     -v /usr/share/tevun/bin/.docker/etc/nginx/conf.d/client_max_body_size.conf:/etc/nginx/conf.d/client_max_body_size.conf:ro \
+    -v /usr/share/tevun/bin/.docker/etc/nginx/vhost.d/default_location:/etc/nginx/vhost.d/default_location:ro \
     --label com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true \
     jwilder/nginx-proxy
 
