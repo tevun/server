@@ -5,7 +5,7 @@ INSTALL_USER=${2}
 echo "[1/3] ~> Create '${INSTALL_USER}'"
 EXISTS=$(grep -c ^${INSTALL_USER}: /etc/passwd)
 if [ "$EXISTS" = '0' ]; then
-  adduser ${INSTALL_USER}
+  userdadd -u 1000 ${INSTALL_USER}
   mkdir -p /home/${INSTALL_USER}/.ssh/
   cp ~/.ssh/authorized_keys /home/${INSTALL_USER}/.ssh/
   chmod 755 /home/${INSTALL_USER}/.ssh/authorized_keys
@@ -13,11 +13,12 @@ if [ "$EXISTS" = '0' ]; then
   echo "deploy ALL=(ALL) ALL" > /etc/sudoers.d/deploy
 fi
 
-echo "[2/3] ~> Configure ssh"
 SSH=$(grep -c ^AllowUsers.*${INSTALL_USER}: /etc/ssh/sshd_config)
 if [ "$EXISTS" = '0' ]; then
+  echo "[2/3] ~> Configure ssh"
   printf '\n%s %s\n' 'AllowUsers' ${INSTALL_USER} >> /etc/ssh/sshd_config
-  service ssh reload
+else 
+  echo "[2/3] ~> Service ssh can not be modified"
 fi
 
 echo "[3/3] ~> Add '${INSTALL_USER}' to docker and root groups"
