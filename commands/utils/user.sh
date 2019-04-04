@@ -5,7 +5,7 @@ INSTALL_USER=${2}
 echo "[1/3] ~> Create '${INSTALL_USER}'"
 EXISTS=$(grep -c ^${INSTALL_USER}: /etc/passwd)
 if [ "$EXISTS" = '0' ]; then
-  userdadd -u 1000 ${INSTALL_USER}
+  useradd -u 1000 ${INSTALL_USER}
   mkdir -p /home/${INSTALL_USER}/.ssh/
   cp ~/.ssh/authorized_keys /home/${INSTALL_USER}/.ssh/
   chmod 755 /home/${INSTALL_USER}/.ssh/authorized_keys
