@@ -36,7 +36,10 @@ case ${ACTION} in
     sh ${TEVUN_DIR_BIN}/commands/utils/user.sh ${TEVUN_DIR_BASE} ${2}
   ;;
   "ssh")
-    sh ${TEVUN_DIR_BIN}/commands/utils/user.sh ${TEVUN_DIR_BASE} ${2}
+    sh ${TEVUN_DIR_BIN}/commands/utils/ssh.sh ${TEVUN_DIR_BASE} ${2}
+  ;;
+  "compose")
+    sh ${TEVUN_DIR_BIN}/commands/utils/compose.sh ${TEVUN_DIR_BASE} ${2}
   ;;
   "ubuntu/locale")
     sh ${TEVUN_DIR_BIN}/commands/utils/ubuntu/locale.sh ${TEVUN_DIR_BASE}
