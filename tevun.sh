@@ -35,6 +35,9 @@ case ${ACTION} in
   "user")
     sh ${TEVUN_DIR_BIN}/commands/utils/user.sh ${TEVUN_DIR_BASE} ${2}
   ;;
+  "ssh")
+    sh ${TEVUN_DIR_BIN}/commands/utils/user.sh ${TEVUN_DIR_BASE} ${2}
+  ;;
   "ubuntu/locale")
     sh ${TEVUN_DIR_BIN}/commands/utils/ubuntu/locale.sh ${TEVUN_DIR_BASE}
   ;;
@@ -62,6 +65,7 @@ case ${ACTION} in
     echo "setup      Start usage server"
     echo "password   Generate a random password"
     echo "user       Create a user"
+    echo "ssh        Setup ssh to user used to run the commands"
     echo "ps         Show running containers"
     echo "domains    List the domains folder"
 
