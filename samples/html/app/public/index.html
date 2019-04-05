@@ -1,1 +1,1 @@
-Your domain <strong>  {project}</strong> is working!
+Your domain <strong>{project}</strong> is working!

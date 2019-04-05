@@ -44,10 +44,10 @@ services:
     links:
       - {project}-mysql
     environment:
-      - VIRTUAL_HOST=  {project}
+      - VIRTUAL_HOST={project}
       - WEB_DOCUMENT_ROOT="/var/www/app/public"
-#      - LETSENCRYPT_EMAIL=certificate@  {project}
-#      - LETSENCRYPT_HOST=  {project}
+#      - LETSENCRYPT_EMAIL=certificate@{project}
+#      - LETSENCRYPT_HOST={project}
 #      - PHP_DEBUGGER="xdebug"
 #      export XDEBUG_REMOTE_HOST=$(ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
 #      - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST}
