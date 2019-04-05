@@ -1,4 +1,3 @@
 /.idea
 /vendor
-/docker-compose.yml
 *.cache
