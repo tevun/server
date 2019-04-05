@@ -84,28 +84,28 @@ Você pode ver os arquivos que são gerados para esse setup inicial [aqui](https
 
 A API Rest para gerenciar o servidor contém os endpoints:
 
-| METHOD | URL                          |
-|--------|------------------------------|
-| GET    | /v1/projects                  |
-| POST   | /v1/projects                  |
-| GET    | /v1/projects/`<domain>`       |
-| DELETE | /v1/projects/`<domain>`       |
-| PATCH  | /v1/projects/`<domain>`/down  |
-| PATCH  | /v1/projects/`<domain>`/up    |
-| PUT    | /v1/projects/`<domain>`/env   |
-| GET    | /v1/projects/`<domain>`/env   |
+| METHOD | URL                            |
+|--------|--------------------------------|
+| GET    | /v1/projects                   |
+| POST   | /v1/projects                   |
+| GET    | /v1/projects/`<project>`       |
+| DELETE | /v1/projects/`<project>`       |
+| PATCH  | /v1/projects/`<project>`/down  |
+| PATCH  | /v1/projects/`<project>`/up    |
+| PUT    | /v1/projects/`<project>`/env   |
+| GET    | /v1/projects/`<project>`/env   |
 
  E conta com os seguintes comandos:
 
  | COMMAND                   | OUTPUT                               |
  |---------------------------|--------------------------------------|
- | install `<host>`          | generated key                        |
+ | install `<project>`       | generated key                        |
  | info                      | `<host>`, `<port>` and generated key |
  | ls                        | domains list                         |
- | create `<domain>`         | docker-compose.yml & git remote      |
- | destroy `<domain>`        | docker output                        |
- | start `<domain>`          | docker output                        |
- | stop `<domain>`           | docker output                        |
+ | create `<project>`        | docker-compose.yml & git remote      |
+ | destroy `<project>`       | docker output                        |
+ | start `<project>`         | docker output                        |
+ | stop `<project>`          | docker output                        |
 
 ### O Cliente
 
@@ -139,10 +139,10 @@ Para instalar o projeto em suas versões iniciais é preciso fazer os passos aba
 Instale o tevun no seu servidor
 ```
 $ ssh root@<ip>
-# mkdir -p /usr/share/tevun/bin
-# cd /usr/share/tevun/bin
+# mkdir -p /usr/share/tevun
+# cd /usr/share/tevun
 # git clone https://github.com/tevun/server.git .
-# ln -s $(pwd)/tevun.sh /usr/local/bin/tevun
+# ln -s $(pwd)/tevun.sh /usr/bin/tevun
 ```
 
 Configure as credenciais adequadamente
