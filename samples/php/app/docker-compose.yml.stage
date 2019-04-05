@@ -8,11 +8,11 @@ networks:
     driver: bridge
 
 volumes:
-    {project}-mysql_data:
+  {project}-mysql_data:
     driver: local
 
 services:
-    {project}-mysql:
+  {project}-mysql:
     image: lyseontech/mysql:v5.7
     container_name: {project}-mysql
     restart: always
@@ -27,7 +27,7 @@ services:
       - MYSQL_USER=user
       - MYSQL_PASSWORD=password
 
-    {project}-app:
+  {project}-app:
     image: lyseontech/php-apache-dev:v7.3
 #    build:
 #      dockerfile: ./.docker/app/Dockerfile

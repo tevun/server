@@ -6,7 +6,7 @@ networks:
       name: reverse-proxy
 
 services:
-    {project}-app:
+  {project}-app:
     image: webdevops/php-apache-dev:7.3
 #    build:
 #      dockerfile: ./.docker/app/Dockerfile
