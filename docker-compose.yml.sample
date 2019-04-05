@@ -21,8 +21,8 @@ services:
       - /etc/nginx/vhost.d
       - /usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - .docker/etc/nginx/conf.d/client_max_body_size.conf:/etc/nginx/conf.d/client_max_body_size.conf:ro
-      - .docker/etc/nginx/vhost.d/default_location:/etc/nginx/vhost.d/default_location:ro
+      - .docker/nginx-proxy/etc/nginx/conf.d/client_max_body_size.conf:/etc/nginx/conf.d/client_max_body_size.conf:ro
+      - .docker/nginx-proxy/etc/nginx/vhost.d/default_location:/etc/nginx/vhost.d/default_location:ro
     ports:
       - 80:80
       - 443:443
@@ -32,10 +32,25 @@ services:
     image: jrcs/letsencrypt-nginx-proxy-companion
     container_name: nginx-letsencrypt
     restart: unless-stopped
+    depends_on:
+      - nginx-proxy
     networks:
       - reverse-proxy
-    volumes_from:
-      - "nginx-proxy"
     volumes:
       - $HOME/certs:/etc/nginx/certs:rw
+      - /etc/nginx/vhost.d
+      - /usr/share/nginx/html
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+
+  tevun:
+    container_name: tevun
+    build: .docker/tevun
+    networks:
+      - reverse-proxy
+    restart: unless-stopped
+    volumes:
+      - /projects:/projects
+    ports:
+      - 8110:8110
