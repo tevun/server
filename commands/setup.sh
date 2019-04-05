@@ -29,6 +29,5 @@ fi
 __plot "[5/5] Start docker containers"
 cd ${BASE}
 docker-compose up -d
-ln -s ${BASE}/tevun.sh /usr/bin/tevun
 
 __plot "[FINISH] ~> Tevun is ready, use 'tevun help'"
