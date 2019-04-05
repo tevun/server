@@ -2,22 +2,22 @@
 
 DIR_NAME=$(dirname $(readlink -f ${0}))
 BASE=$(dirname $(readlink -f "${DIR_NAME}/../.."))
-DOMAIN="{domain}"
-APP=${BASE}/${DOMAIN}/app
+DOMAIN="  {project}"
+APP=${BASE}/$  {project}/app
 BRANCH="master"
 
 cd ${APP}
 
 # hook pre-checkout
 if [ -f ".tevun/hooks/pre-checkout.sh" ]; then
-  bash .tevun/hooks/pre-checkout.sh ${APP} ${DOMAIN}
+  bash .tevun/hooks/pre-checkout.sh ${APP} $  {project}
 fi
 
 # hook setup
 if [ -f ".tevun/hooks/setup.sh" ]; then
   READY=".tevun-ready"
   if [ ! -f ${READY} ]; then
-    bash .tevun/hooks/setup.sh ${APP} ${DOMAIN}
+    bash .tevun/hooks/setup.sh ${APP} $  {project}
   fi
   touch ${READY}
 fi
@@ -29,10 +29,10 @@ GIT_WORK_TREE="${APP}" git checkout -f ${BRANCH}
 # hook post-checkout
 cd ${APP}
 if [ -f ".tevun/hooks/post-checkout.sh" ]; then
-  bash .tevun/hooks/post-checkout.sh ${APP} ${DOMAIN}
+  bash .tevun/hooks/post-checkout.sh ${APP} $  {project}
 fi
 
 # hook install
 if [ -f ".tevun/hooks/install.sh" ]; then
-  bash .tevun/hooks/install.sh ${APP} ${DOMAIN}
+  bash .tevun/hooks/install.sh ${APP} $  {project}
 fi

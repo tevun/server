@@ -6,22 +6,22 @@ networks:
       name: reverse-proxy
 
 services:
-  {domain}-app:
-    image: lyseontech/php-apache-dev:v7.3
+    {project}-app:
+    image: webdevops/php-apache-dev:7.3
 #    build:
 #      dockerfile: ./.docker/app/Dockerfile
 #      context: .
-    container_name: {domain}-app
+    container_name: {project}-app
     restart: always
     networks:
       - reverse-proxy
     volumes:
       - .:/var/www/app
     environment:
-      - VIRTUAL_HOST={domain}
+      - VIRTUAL_HOST=  {project}
       - WEB_DOCUMENT_ROOT="/var/www/app/public"
-#      - LETSENCRYPT_EMAIL=certificate@{domain}
-#      - LETSENCRYPT_HOST={domain}
+#      - LETSENCRYPT_EMAIL=certificate@  {project}
+#      - LETSENCRYPT_HOST=  {project}
 #      - PHP_DEBUGGER="xdebug"
 #      export XDEBUG_REMOTE_HOST=$(ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
 #      - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST}

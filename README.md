@@ -11,8 +11,8 @@
 ### Disclaimer
 ----
 > No momento não há ainda como fazer os procedimentos abaixo.
-> 
-> Para entender o estado do projeto atualmente clique [aqui](https://github.com/tevun/server#versões-iniciais) 
+>
+> Para entender o estado do projeto atualmente clique [aqui](https://github.com/tevun/server#versões-iniciais)
 ----
 
 # O Projeto
@@ -44,8 +44,8 @@ Depois de instalado ele irá disponibilizar para você um conjunto de comandos e
 
 A topologia do projeto é semelhante à imagem abaixo.
 <p align="center">
-  <img 
-    src="https://github.com/tevun/server/raw/master/images/topology.jpg" 
+  <img
+    src="https://github.com/tevun/server/raw/master/images/topology.jpg"
     alt="Pairing"
   >
 </p>
@@ -53,8 +53,8 @@ A topologia do projeto é semelhante à imagem abaixo.
 Para garantir a identidade do cliente é preciso pareá-lo antes de rodar os primeiros comandos.
 Para fazer este processo é preciso informar o `server key`, que será validado para ativação do cliente que fez o pedido como apto a se comunicar com o servidor.
 <p align="center">
-  <img 
-    src="https://github.com/tevun/server/raw/master/images/pair.jpg" 
+  <img
+    src="https://github.com/tevun/server/raw/master/images/pair.jpg"
     alt="Pairing"
   >
 </p>
@@ -67,8 +67,8 @@ $ tevun add example.com
 
 E quando acessar no navegador verá:
 <p align="center">
-  <img 
-    src="https://github.com/tevun/server/raw/master/images/works.png" 
+  <img
+    src="https://github.com/tevun/server/raw/master/images/works.png"
     alt="Pairing"
   >
 </p>
@@ -86,17 +86,17 @@ A API Rest para gerenciar o servidor contém os endpoints:
 
 | METHOD | URL                          |
 |--------|------------------------------|
-| GET    | /v1/domains                  |
-| POST   | /v1/domains                  |
-| GET    | /v1/domains/`<domain>`       |
-| DELETE | /v1/domains/`<domain>`       |
-| PATCH  | /v1/domains/`<domain>`/down  |
-| PATCH  | /v1/domains/`<domain>`/up    |
-| PUT    | /v1/domains/`<domain>`/env   |
-| GET    | /v1/domains/`<domain>`/env   |
- 
+| GET    | /v1/projects                  |
+| POST   | /v1/projects                  |
+| GET    | /v1/projects/`<domain>`       |
+| DELETE | /v1/projects/`<domain>`       |
+| PATCH  | /v1/projects/`<domain>`/down  |
+| PATCH  | /v1/projects/`<domain>`/up    |
+| PUT    | /v1/projects/`<domain>`/env   |
+| GET    | /v1/projects/`<domain>`/env   |
+
  E conta com os seguintes comandos:
- 
+
  | COMMAND                   | OUTPUT                               |
  |---------------------------|--------------------------------------|
  | install `<host>`          | generated key                        |
@@ -122,11 +122,11 @@ O Cliente disponibiliza os seguintes comandos:
  | rm `<domain>`             | docker output                        |
  | up `<domain>`             | docker output                        |
  | down `<domain>`           | docker output                        |
- 
+
 ### Versões Iniciais
- 
+
 Nestas versões iniciais ainda não temos vários recursos disponíveis, como a API e o CLI, mas temos um conjunto de comandos que já pode dar uma ideia do que está por vir.
- 
+
 Como requisitos para rodar o projeto você precisa ter o `docker` e o `docker-compose` instalados.
 Caso não tenha você pode ver se o seu sistema é compatível com algum dos nossos instaladores disponíveis.
 Dê uma olha [nesta pasta](https://github.com/tevun/server/tree/master/installers) para ver se encontra seu sitema na lista.
@@ -140,7 +140,7 @@ Instale o tevun no seu servidor
 ```
 $ ssh root@<ip>
 # mkdir -p /usr/share/tevun/bin
-# cd /usr/share/tevun/bin 
+# cd /usr/share/tevun/bin
 # git clone https://github.com/tevun/server.git .
 # ln -s $(pwd)/tevun.sh /usr/local/bin/tevun
 ```
@@ -176,11 +176,11 @@ Para gerencias os domínios você tem os seguintes comandos:
 ##### Configurando o projeto
 
 ```
-$ git remote add deploy ssh://<user>@<ip>/domains/<domain>/repo
+$ git remote add deploy ssh://<user>@<ip>/projects/<domain>/repo
 $ git fetch deploy +refs/heads/setup:refs/remotes/deploy/setup
 $ git branch --no-track setup refs/remotes/deploy/setup
 $ git branch --set-upstream-to=deploy/setup setup
-$ git merge --no-ff deploy/setup --allow-unrelated-histories 
+$ git merge --no-ff deploy/setup --allow-unrelated-histories
 ```
 
 ### Instalação de Requisitos
@@ -203,7 +203,7 @@ Para instalar no `ubuntu` o docker `17.12.0~ce-0~ubuntu` e docker-compose `1.18.
 #### Parâmetros
 
 1. `<user>` [optional]
-O nome do usuário que terá acesso ao servidor. 
+O nome do usuário que terá acesso ao servidor.
 Pode ser `sysadmin` ou qualquer coisa que você quiser.
 O usuário informado deverá ser usado no próximo acesso ao servidor e o usuário `root` perderá acesso ao SSH.
 O valor padrão será `tevun`;

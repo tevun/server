@@ -1,53 +1,67 @@
 #!/bin/bash
 
 BASE=${1}
-DOMAIN=${2}
+PROJECT=${2}
 SAMPLE=${3}
 
-SAMPLES=${BASE}/bin/samples
-DOMAINS=${BASE}/domains
+source ${BASE}/functions.sh
 
-REPO=${DOMAINS}/${DOMAIN}/repo
-APP=${DOMAINS}/${DOMAIN}/app
+SAMPLES=${BASE}/samples
+PROJECTS=${BASE}/projects
 
-if [ ! "${SAMPLE}" ];then
-  SAMPLE="php"
+REPO=${PROJECTS}/${PROJECT}/repo
+APP=${PROJECTS}/${PROJECT}/app
+
+if [[ ! "${SAMPLE}" ]]; then
+  SAMPLE="html"
 fi
 
 # CREATE REPO
 mkdir -p ${REPO}
+__plot "[1/8] Create project repo dir '${REPO}'"
 cd ${REPO}
-git init --bare
+git init --bare > /dev/null
+git config --file config http.receivepack true > /dev/null
 
 # CREATE APP
-mkdir -p ${APP}
+mkdir -p ${APP} > /dev/null
+__plot "[2/8] Create project app dir '${APP}'"
 cd ${APP}
-git init && git remote add origin ${REPO}
-git commit --allow-empty -m "Init" && git push origin master
+git init > /dev/null && git remote add origin ${REPO} > /dev/null
+__plot "[3/8] Initialize git master remote"
+git commit --allow-empty -m "Init" > /dev/null && git push origin master > /dev/null
 
 # CONFIGURE REPO
-cp -TRv ${SAMPLES}/${SAMPLE}/repo/ ${REPO}/
-find ${REPO}/hooks -type f -exec sed -i "s/{domain}/${DOMAIN}/g" {} \;
-chmod +x ${REPO}/hooks/post-receive
+__plot "[4/8] Configure hooks in repo"
+cp -TRv ${SAMPLES}/${SAMPLE}/repo/ ${REPO}/ > /dev/null
+find ${REPO}/hooks -type f -exec sed -i "s/{project}/${PROJECT}/g" {} \; > /dev/null
+chmod +x ${REPO}/hooks/post-receive > /dev/null
 
 # CONFIGURE APP
-cp -TRv ${SAMPLES}/${SAMPLE}/app/ ${APP}/
-find ${APP} -type f -exec sed -i "s/{domain}/${DOMAIN}/g" {} \;
+__plot "[5/8] Configure app dir"
+cp -TRv ${SAMPLES}/${SAMPLE}/app/ ${APP}/ > /dev/null
+find ${APP} -type f -exec sed -i "s/{project}/${PROJECT}/g" {} \; > /dev/null
 
 # PREPARE APP
-git checkout -b setup
-git add --all && git commit --allow-empty -m "Setup"
+__plot "[6/8] Create setup branch"
+git checkout -b setup > /dev/null
+git add --all > /dev/null && git commit --allow-empty -m "Setup" > /dev/null
 
 # CONFIGURE SAMPLE
-sh ${SAMPLES}/${SAMPLE}/configure.sh ${APP}
+__plot "[7/8] Configure sample project '${SAMPLE}'"
+bash ${SAMPLES}/${SAMPLE}/configure.sh ${APP} > /dev/null
 
 # INIT APP
-git push origin setup --force
-rm -rf ${APP}/.git
-rm ${APP}/.ready
+__plot "[8/8] Configure setup branch"
+git push origin setup --force > /dev/null
+rm -rf ${APP}/.git > /dev/null
+if [[ ! ${APP}/.ready ]]; then
+  rm ${APP}/.ready > /dev/null
+fi
 
 # INFO
 echo " -- "
-echo " ~> git remote add deploy ssh://<user>@<ip>/domains/${DOMAIN}/repo"
+echo " ~> git remote add deploy https://<user>@<ip>:8110/${PROJECT}/repo"
 echo " "
+__plot "[FINISH] ~> Project '${PROJECT}' created"
 

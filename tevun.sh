@@ -2,67 +2,66 @@
 
 ACTION=${1}
 TEVUN_DIR_BIN=$(dirname $(readlink -f ${0}))
-TEVUN_DIR_BASE=$(dirname ${TEVUN_DIR_BIN})
 
 case ${ACTION} in
   "setup")
-    sh ${TEVUN_DIR_BIN}/commands/setup.sh ${TEVUN_DIR_BASE} ${2}
+    bash ${TEVUN_DIR_BIN}/commands/setup.sh ${TEVUN_DIR_BIN} ${2}
   ;;
   "create")
-    sh ${TEVUN_DIR_BIN}/commands/create.sh ${TEVUN_DIR_BASE} ${2} ${3}
+    bash ${TEVUN_DIR_BIN}/commands/create.sh ${TEVUN_DIR_BIN} ${2} ${3}
   ;;
   "destroy")
-    sh ${TEVUN_DIR_BIN}/commands/destroy.sh ${TEVUN_DIR_BASE} ${2}
+    bash ${TEVUN_DIR_BIN}/commands/destroy.sh ${TEVUN_DIR_BIN} ${2}
   ;;
   "start")
-    sh ${TEVUN_DIR_BIN}/commands/start.sh ${TEVUN_DIR_BASE} ${2}
+    bash ${TEVUN_DIR_BIN}/commands/start.sh ${TEVUN_DIR_BIN} ${2}
   ;;
   "stop")
-    sh ${TEVUN_DIR_BIN}/commands/stop.sh ${TEVUN_DIR_BASE} ${2}
+    bash ${TEVUN_DIR_BIN}/commands/stop.sh ${TEVUN_DIR_BIN} ${2}
   ;;
   "up")
-    sh ${TEVUN_DIR_BIN}/commands/up.sh ${TEVUN_DIR_BASE} ${2}
+    bash ${TEVUN_DIR_BIN}/commands/up.sh ${TEVUN_DIR_BIN} ${2}
   ;;
   "down")
-    sh ${TEVUN_DIR_BIN}/commands/down.sh ${TEVUN_DIR_BASE} ${2}
+    bash ${TEVUN_DIR_BIN}/commands/down.sh ${TEVUN_DIR_BIN} ${2}
   ;;
-  "domains")
-    sh ${TEVUN_DIR_BIN}/commands/domains.sh ${TEVUN_DIR_BASE}
+  "projects")
+    bash ${TEVUN_DIR_BIN}/commands/projects.sh ${TEVUN_DIR_BIN}
   ;;
   "password")
-    sh ${TEVUN_DIR_BIN}/commands/utils/password.sh ${TEVUN_DIR_BASE}
+    bash ${TEVUN_DIR_BIN}/commands/utils/password.sh ${TEVUN_DIR_BIN}
   ;;
   "user")
-    sh ${TEVUN_DIR_BIN}/commands/utils/user.sh ${TEVUN_DIR_BASE} ${2}
+    bash ${TEVUN_DIR_BIN}/commands/utils/user.sh ${TEVUN_DIR_BIN} ${2}
   ;;
   "ssh")
-    sh ${TEVUN_DIR_BIN}/commands/utils/ssh.sh ${TEVUN_DIR_BASE} ${2}
+    bash ${TEVUN_DIR_BIN}/commands/utils/ssh.sh ${TEVUN_DIR_BIN} ${2}
   ;;
   "compose")
-    sh ${TEVUN_DIR_BIN}/commands/utils/compose.sh ${TEVUN_DIR_BASE} ${2}
+    bash ${TEVUN_DIR_BIN}/commands/utils/compose.sh ${TEVUN_DIR_BIN} ${2}
   ;;
   "ubuntu/locale")
-    sh ${TEVUN_DIR_BIN}/commands/utils/ubuntu/locale.sh ${TEVUN_DIR_BASE}
+    bash ${TEVUN_DIR_BIN}/commands/utils/ubuntu/locale.sh ${TEVUN_DIR_BIN}
   ;;
   "lets-encrypt/renew")
-    sh ${TEVUN_DIR_BIN}/commands/utils/lets-encrypt/renew.sh ${TEVUN_DIR_BASE}
+    bash ${TEVUN_DIR_BIN}/commands/utils/lets-encrypt/renew.sh ${TEVUN_DIR_BIN}
   ;;
   "lets-encrypt/status")
-    sh ${TEVUN_DIR_BIN}/commands/utils/lets-encrypt/status.sh ${TEVUN_DIR_BASE}
+    bash ${TEVUN_DIR_BIN}/commands/utils/lets-encrypt/status.sh ${TEVUN_DIR_BIN}
   ;;
   "ps")
-    sh ${TEVUN_DIR_BIN}/commands/utils/ps.sh ${TEVUN_DIR_BASE}
+    bash ${TEVUN_DIR_BIN}/commands/utils/ps.sh ${TEVUN_DIR_BIN}
   ;;
   "requirement")
     INSTALLER="${TEVUN_DIR_BIN}/installers/${2}.sh"
     if [[ -f ${INSTALLER} ]];then
-      sh ${INSTALLER}
+      bash ${INSTALLER}
     fi
   ;;
   *)
     echo "Usage: tevun COMMAND"
     echo ""
-    echo "A domain container agile"
+    echo "A project container agile"
     echo ""
     echo "Administrative Commands:"
     echo "setup      Start usage server"
@@ -70,16 +69,16 @@ case ${ACTION} in
     echo "user       Create a user"
     echo "ssh        Setup ssh to user used to run the commands"
     echo "ps         Show running containers"
-    echo "domains    List the domains folder"
+    echo "projects    List the projects folder"
 
     echo ""
-    echo "Domain Management Commands:"
-    echo "create     Create domain"
-    echo "destroy    Destroy domain"
-    echo "start      Apply start on domain"
-    echo "stop       Apply stop on domain"
-    echo "up         Apply up on domain"
-    echo "down       Apply up on domain"
+    echo "Project Management Commands:"
+    echo "create     Create project"
+    echo "destroy    Destroy project"
+    echo "start      Apply start on project"
+    echo "stop       Apply stop on project"
+    echo "up         Apply up on project"
+    echo "down       Apply up on project"
 
     echo ""
     echo "Util Commands:"
@@ -97,7 +96,7 @@ function __tevun
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
-    opts="setup password user ps domains \
+    opts="setup password user ps projects \
           create destroy start stop up down \
           ubuntu/locale lets-encrypt/renew lets-encrypt/status requirement \
           help"
