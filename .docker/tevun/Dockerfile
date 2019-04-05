@@ -16,6 +16,7 @@ VOLUME ["/projects"]
 # - spawn-fcgi, to launch fcgiwrap and to create the unix socket
 # - nginx, because it is our frontend
 RUN apk add --update nginx && \
+    apk add --update bash && \
     apk add --update git && \
     apk add --update git-daemon && \
     apk add --update fcgiwrap && \
