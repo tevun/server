@@ -1,11 +1,11 @@
-version: '3'
+version: '3.7'
 
 #networks
 networks:
   #network reverse-proxy
   reverse-proxy:
+    external: true
     name: reverse-proxy
-    driver: bridge
 
 #services
 services:
