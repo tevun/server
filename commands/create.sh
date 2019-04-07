@@ -55,9 +55,7 @@ bash ${SAMPLES}/${SAMPLE}/configure.sh ${APP} > /dev/null
 __plot "[8/8] Configure setup branch"
 git push origin setup --force > /dev/null
 rm -rf ${APP}/.git > /dev/null
-if [[ ! ${APP}/.ready ]]; then
-  rm ${APP}/.ready > /dev/null
-fi
+rm ${APP}/.tevun-ready > /dev/null
 
 # INFO
 echo " -- "

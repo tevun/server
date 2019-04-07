@@ -15,14 +15,13 @@ if [[ ! -d ${PROJECTS}/${PROJECT} ]]; then
   exit 0
 fi
 
-cd ${APP}
-
 __plot "[1/1] Destroy '${PROJECT}' (${PROJECTS}/${PROJECT})?"
 echo -n " y/n: "
 read DESTROY
 TEVUN_MESSAGE="The project '${PROJECT}' was not destroyed"
 if [[ ${DESTROY} = "y" ]]; then
-  if [[ -f "./docker-compose.yml" ]]; then
+  cd ${APP}
+  if [[ -f "docker-compose.yml" ]]; then
     docker-compose down
     docker-compose rm -f
   fi

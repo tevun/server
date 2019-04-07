@@ -1,7 +1,5 @@
 # small is beautiful
-FROM alpine:latest
-
-MAINTAINER Anthony Hogg anthony@hogg.fr
+FROM docker:18.06.3-ce
 
 # The container listens on port 8110, map as needed
 EXPOSE 8110
@@ -21,9 +19,13 @@ RUN apk add --update nginx && \
     apk add --update git-daemon && \
     apk add --update fcgiwrap && \
     apk add --update spawn-fcgi && \
+    apk add --update py-pip && \
+    apk add --update python-dev libffi-dev openssl-dev gcc libc-dev make && \
     rm -rf /var/cache/apk/*
 
 COPY ./etc/nginx/nginx.conf /etc/nginx/nginx.conf
+
+RUN pip install docker-compose
 
 # launch fcgiwrap via spawn-fcgi; launch nginx in the foreground
 # so the container doesn't die on us; supposedly we should be

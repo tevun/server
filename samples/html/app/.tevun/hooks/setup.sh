@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#cd ${1}
+cd ${1}
 
 echo " ~> [hooks\setup.sh] on [${1}, ${2}]"
 
