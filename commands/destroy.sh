@@ -8,7 +8,7 @@ PROJECTS=${BASE}/projects
 REPO=${PROJECTS}/${PROJECT}/repo
 APP=${PROJECTS}/${PROJECT}/app
 
-source ${BASE}/functions.sh
+source ${BASE}/tevun-functions.sh
 
 if [[ ! -d ${PROJECTS}/${PROJECT} ]]; then
   __plot "[FINISH] ~> Project '${PROJECT}' doesn't exists"

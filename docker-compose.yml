@@ -47,7 +47,7 @@ services:
 
   tevun:
     container_name: tevun
-    build: .docker/tevun
+    image: tevun/server:1.0
     networks:
       - reverse-proxy
     restart: unless-stopped

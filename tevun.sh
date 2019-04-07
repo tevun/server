@@ -1,63 +1,78 @@
 #!/usr/bin/env bash
 
 ACTION=${1}
-TEVUN_DIR_BIN=$(dirname $(readlink -f ${0}))
+TEVUN_DIR=$(dirname $(readlink -f ${0}))
+
+cd ${TEVUN_DIR}
+source ./tevun-functions.sh
+
+if [[ ! -f .env ]]; then
+  cp .env.sample .env
+fi
+source .env
 
 case ${ACTION} in
   "setup")
-    bash ${TEVUN_DIR_BIN}/commands/setup.sh ${TEVUN_DIR_BIN} ${2}
-  ;;
-  "create")
-    bash ${TEVUN_DIR_BIN}/commands/create.sh ${TEVUN_DIR_BIN} ${2} ${3}
-  ;;
-  "destroy")
-    bash ${TEVUN_DIR_BIN}/commands/destroy.sh ${TEVUN_DIR_BIN} ${2}
-  ;;
-  "start")
-    bash ${TEVUN_DIR_BIN}/commands/start.sh ${TEVUN_DIR_BIN} ${2}
-  ;;
-  "stop")
-    bash ${TEVUN_DIR_BIN}/commands/stop.sh ${TEVUN_DIR_BIN} ${2}
-  ;;
-  "up")
-    bash ${TEVUN_DIR_BIN}/commands/up.sh ${TEVUN_DIR_BIN} ${2}
-  ;;
-  "down")
-    bash ${TEVUN_DIR_BIN}/commands/down.sh ${TEVUN_DIR_BIN} ${2}
-  ;;
-  "projects")
-    bash ${TEVUN_DIR_BIN}/commands/projects.sh ${TEVUN_DIR_BIN}
-  ;;
-  "password")
-    bash ${TEVUN_DIR_BIN}/commands/utils/password.sh ${TEVUN_DIR_BIN}
-  ;;
-  "user")
-    bash ${TEVUN_DIR_BIN}/commands/utils/user.sh ${TEVUN_DIR_BIN} ${2}
-  ;;
-  "ssh")
-    bash ${TEVUN_DIR_BIN}/commands/utils/ssh.sh ${TEVUN_DIR_BIN} ${2}
-  ;;
-  "compose")
-    bash ${TEVUN_DIR_BIN}/commands/utils/compose.sh ${TEVUN_DIR_BIN} ${2}
-  ;;
-  "ubuntu/locale")
-    bash ${TEVUN_DIR_BIN}/commands/utils/ubuntu/locale.sh ${TEVUN_DIR_BIN}
-  ;;
-  "lets-encrypt/renew")
-    bash ${TEVUN_DIR_BIN}/commands/utils/lets-encrypt/renew.sh ${TEVUN_DIR_BIN}
-  ;;
-  "lets-encrypt/status")
-    bash ${TEVUN_DIR_BIN}/commands/utils/lets-encrypt/status.sh ${TEVUN_DIR_BIN}
+    source ./commands/setup.sh
   ;;
   "ps")
-    bash ${TEVUN_DIR_BIN}/commands/utils/ps.sh ${TEVUN_DIR_BIN}
+    source ./commands/utils/ps.sh
+  ;;
+
+  "create")
+    source ./commands/create.sh
+  ;;
+  "destroy")
+    source ./commands/destroy.sh
+  ;;
+
+  "user")
+    source ./commands/utils/user.sh
+  ;;
+  "ssh")
+    source ./commands/utils/ssh.sh
+  ;;
+
+  "lets-encrypt/renew")
+    source ./commands/utils/lets-encrypt/renew.sh
+  ;;
+  "lets-encrypt/status")
+    source ./commands/utils/lets-encrypt/status.sh
+  ;;
+
+  "ubuntu/locale")
+    source ./commands/utils/ubuntu/locale.sh
   ;;
   "requirement")
-    INSTALLER="${TEVUN_DIR_BIN}/installers/${2}.sh"
+    INSTALLER="${TEVUN_DIR}/installers/${2}.sh"
     if [[ -f ${INSTALLER} ]];then
-      bash ${INSTALLER}
+      source ${INSTALLER}
     fi
   ;;
+
+#  "start")
+#    source ./commands/start.sh ${TEVUN_DIR} ${2}
+#  ;;
+#  "stop")
+#    source ./commands/stop.sh ${TEVUN_DIR} ${2}
+#  ;;
+#  "up")
+#    source ./commands/up.sh ${TEVUN_DIR} ${2}
+#  ;;
+#  "down")
+#    source ./commands/down.sh ${TEVUN_DIR} ${2}
+#  ;;
+#  "projects")
+#    source ./commands/projects.sh ${TEVUN_DIR}
+#  ;;
+#  "password")
+#    source ./commands/utils/password.sh ${TEVUN_DIR}
+#  ;;
+
+#  "compose")
+#    source ./commands/utils/compose.sh ${TEVUN_DIR} ${2}
+#  ;;
+
   *)
     echo "Usage: tevun COMMAND"
     echo ""
@@ -65,20 +80,20 @@ case ${ACTION} in
     echo ""
     echo "Administrative Commands:"
     echo "setup      Start usage server"
-    echo "password   Generate a random password"
-    echo "user       Create a user"
-    echo "ssh        Setup ssh to user used to run the commands"
     echo "ps         Show running containers"
-    echo "projects    List the projects folder"
+    echo "user       Create an user and configure system to use it"
+    echo "ssh        Configure ssh with user that will be used to execute the commands"
+#    echo "password   Generate a random password"
+#    echo "projects    List the projects folder"
 
     echo ""
     echo "Project Management Commands:"
     echo "create     Create project"
     echo "destroy    Destroy project"
-    echo "start      Apply start on project"
-    echo "stop       Apply stop on project"
-    echo "up         Apply up on project"
-    echo "down       Apply up on project"
+#    echo "start      Apply start on project"
+#    echo "stop       Apply stop on project"
+#    echo "up         Apply up on project"
+#    echo "down       Apply up on project"
 
     echo ""
     echo "Util Commands:"

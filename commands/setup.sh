@@ -1,29 +1,27 @@
 #!/bin/bash
 
-BASE=${1}
-TEVUN_USER=1000
-if [[ "${2}" ]]; then
-  TEVUN_USER=${2}
-fi
+cd ${TEVUN_DIR}
 
-source ${BASE}/functions.sh
+if [[ "${2}" ]]; then
+  TEVUN_USER_ID=${2}
+fi
 
 __plot "[1/6] Configure git"
-git config --global user.email "setup@tevun.com"
-git config --global user.name "Tevun Setup"
+git config --global user.email ${TEVUN_USER_EMAIL} >> /dev/null
+git config --global user.name ${TEVUN_USER_NAME} >> /dev/null
 
-__plot "[2/6] Create projects dir in '${BASE}/projects'"
-if [[ ! -d "${BASE}/projects" ]];then
-  mkdir -p ${BASE}/projects
+__plot "[2/6] Create projects dir in '${TEVUN_DIR}/projects'"
+if [[ ! -d "${TEVUN_DIR}/projects" ]];then
+  mkdir -p ${TEVUN_DIR}/projects
 fi
 
-__plot "[3/6] Configure permissions of projects dir to user: '${TEVUN_USER}'"
-chmod 755 ${BASE}/projects
-chown ${TEVUN_USER}:${TEVUN_USER} ${BASE}/projects
+__plot "[3/6] Configure permissions of projects dir to user: '${TEVUN_USER_ID}'"
+chmod 755 ${TEVUN_DIR}/projects
+chown ${TEVUN_USER_ID}:${TEVUN_USER_ID} ${TEVUN_DIR}/projects
 
 __plot "[4/6] Create the symlink in '/projects'"
 if [[ ! -h "/projects" ]];then
-  ln -s ${BASE}/projects /projects
+  ln -s ${TEVUN_DIR}/projects /projects
 fi
 
 __plot "[5/6] Create global docker network"
@@ -33,7 +31,6 @@ if [[ ! "${NETWORK_EXISTS}" ]];then
 fi
 
 __plot "[5/6] Start docker containers"
-cd ${BASE}
-docker-compose up -d
+docker-compose down && docker-compose rm -f && docker-compose up -d
 
 __plot "[FINISH] ~> Tevun is ready, use 'tevun help'"

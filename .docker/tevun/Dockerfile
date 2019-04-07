@@ -27,6 +27,8 @@ COPY ./etc/nginx/nginx.conf /etc/nginx/nginx.conf
 
 RUN pip install docker-compose
 
+RUN addgroup -S tevun && adduser -u 1000 -S tevun -G tevun
+
 # launch fcgiwrap via spawn-fcgi; launch nginx in the foreground
 # so the container doesn't die on us; supposedly we should be
 # using supervisord or something like that instead, but this

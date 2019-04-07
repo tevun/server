@@ -1,13 +1,10 @@
 #!/bin/bash
 
-BASE=${1}
 PROJECT=${2}
 SAMPLE=${3}
 
-source ${BASE}/functions.sh
-
-SAMPLES=${BASE}/samples
-PROJECTS=${BASE}/projects
+SAMPLES=${TEVUN_DIR}/samples
+PROJECTS=${TEVUN_DIR}/projects
 
 REPO=${PROJECTS}/${PROJECT}/repo
 APP=${PROJECTS}/${PROJECT}/app
