@@ -39,9 +39,12 @@ cd $(dirname ${DIR_NAME})
 __plot "[3/5] Checkout"
 GIT_WORK_TREE="${APP}" git checkout -f ${BRANCH}
 
+cd ${APP}
+
+chown 1000:1000 . -R
+
 # hook post-checkout
 __plot "[4/5] Hook post-checkout"
-cd ${APP}
 if [[ -f ".tevun/hooks/post-checkout.sh" ]]; then
   bash .tevun/hooks/post-checkout.sh ${APP} ${PROJECT}
 fi
