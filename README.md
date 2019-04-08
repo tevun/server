@@ -121,6 +121,9 @@ To register users in Tevun use the command below:
 $ tevun register <user>
 ```
 This is a short hand to http basic auth and the file with permissions is in file `/etc/nginx/.users` of tevun container.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/tevun/server/master/images/output-register.png"/>
+</p>
 
 #### Destroy a project
 
@@ -132,3 +135,19 @@ The command will not erase the docker volumes, but is important to be careful wi
 <p align="center">
   <img src="https://raw.githubusercontent.com/tevun/server/master/images/output-destroy.png"/>
 </p>
+
+
+#### Configure in an existing project
+
+We can get the branch setup of project repository to get the files to configure our project to run in Tevun.
+
+```
+# add the remote to your repo
+$ git remote add deploy https://<user>@<host>:8110/<project>/repo
+# fetch the setup branch
+$ git fetch deploy +refs/heads/setup:refs/remotes/deploy/setup
+# get setup branch from remote
+$ git branch --track setup refs/remotes/deploy/setup
+# merge setup branch to your local branch
+$ git merge --no-ff deploy/setup --allow-unrelated-histories
+```
