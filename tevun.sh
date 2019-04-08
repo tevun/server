@@ -11,6 +11,12 @@ if [[ ! -f .env ]]; then
 fi
 source .env
 
+if [[ ! -f .env ]]; then
+  TEVUN_UUID=$(cat /proc/sys/kernel/random/uuid)
+  echo ${TEVUN_UUID} > .key
+fi
+TEVUN_UUID=$(cat .key)
+
 case ${ACTION} in
   "setup")
     source ./commands/setup.sh
@@ -20,17 +26,20 @@ case ${ACTION} in
   ;;
 
   "create")
-    source ./commands/create.sh
+    source ./commands/project/create.sh
   ;;
   "destroy")
-    source ./commands/destroy.sh
+    source ./commands/project/destroy.sh
   ;;
 
   "user")
-    source ./commands/utils/user.sh
+    source ./commands/credential/user.sh
   ;;
   "ssh")
-    source ./commands/utils/ssh.sh
+    source ./commands/credential/ssh.sh
+  ;;
+  "register")
+    source ./commands/credential/register.sh
   ;;
 
   "lets-encrypt/renew")

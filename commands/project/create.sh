@@ -55,8 +55,8 @@ rm -rf ${APP}/.git > /dev/null
 rm ${APP}/.tevun-ready > /dev/null
 
 # INFO
-echo " -- "
-echo " ~> git remote add deploy https://<user>@<ip>:8110/${PROJECT}/repo"
+__plot "[REMOTE]"
+__plot " https://${TEVUN_HOST}:${TEVUN_PORT}/${PROJECT}/repo"
 echo " "
 __plot "[FINISH] ~> Project '${PROJECT}' created"
 

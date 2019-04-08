@@ -6,7 +6,7 @@ EXPOSE 8110
 
 # This is where the repositories will be stored, and
 # should be mounted from the host (or a volume container)
-VOLUME ["/projects"]
+VOLUME ["/app"]
 
 # We need the following:
 # - git, because that gets us the git-http-backend CGI script
@@ -19,11 +19,13 @@ RUN apk add --update nginx && \
     apk add --update git-daemon && \
     apk add --update fcgiwrap && \
     apk add --update spawn-fcgi && \
+    apk add --update apache2-utils && \
     apk add --update py-pip && \
     apk add --update python-dev libffi-dev openssl-dev gcc libc-dev make && \
     rm -rf /var/cache/apk/*
 
 COPY ./etc/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./etc/nginx/.users /etc/nginx/.users
 
 RUN pip install docker-compose
 

@@ -1,14 +1,12 @@
 #!/bin/bash
 
-BASE=${1}
 PROJECT=${2}
-
-PROJECTS=${BASE}/projects
+PROJECTS=${TEVUN_DIR}/projects
 
 REPO=${PROJECTS}/${PROJECT}/repo
 APP=${PROJECTS}/${PROJECT}/app
 
-source ${BASE}/tevun-functions.sh
+source ${TEVUN_DIR}/tevun-functions.sh
 
 if [[ ! -d ${PROJECTS}/${PROJECT} ]]; then
   __plot "[FINISH] ~> Project '${PROJECT}' doesn't exists"

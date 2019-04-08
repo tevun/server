@@ -33,4 +33,6 @@ fi
 __plot "[5/6] Start docker containers"
 docker-compose down && docker-compose rm -f && docker-compose up -d
 
-__plot "[FINISH] ~> Tevun is ready, use 'tevun help'"
+__plot "[FINISH] ~> Tevun is ready with"
+__plot " Your server key is: '${TEVUN_UUID}'"
+__plot " Use 'tevun help'"
