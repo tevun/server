@@ -11,7 +11,7 @@ if [[ ! -f .env ]]; then
 fi
 source .env
 
-if [[ ! -f .env ]]; then
+if [[ ! -f .key ]]; then
   TEVUN_UUID=$(cat /proc/sys/kernel/random/uuid)
   echo ${TEVUN_UUID} > .key
 fi
