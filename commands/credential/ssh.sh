@@ -12,6 +12,6 @@ echo "deploy ALL=(ALL) ALL" > /etc/sudoers.d/deploy
 
 echo "[2/2] ~> Configure '/etc/ssh/sshd_config'"
 TEVUN_USER_ALLOWED=$(grep -c ^AllowUsers.*${TEVUN_USER_INSTALL}: /etc/ssh/sshd_config)
-if [ "$TEVUN_USER_ALLOWED" = '0' ]; then
+if [[ "$TEVUN_USER_ALLOWED" = '0' ]]; then
   printf '\n%s %s\n' 'AllowUsers' ${TEVUN_USER_INSTALL} >> /etc/ssh/sshd_config
 fi

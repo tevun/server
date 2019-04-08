@@ -4,7 +4,7 @@ TEVUN_USER_INSTALL=${2}
 
 echo "[1/2] ~> Create '${TEVUN_USER_INSTALL}'"
 EXISTS=$(grep -c ^${TEVUN_USER_INSTALL}: /etc/passwd)
-if [ "$EXISTS" = '0' ]; then
+if [[ "$EXISTS" = '0' ]]; then
   useradd -u 1000 ${TEVUN_USER_INSTALL}
 fi
 
