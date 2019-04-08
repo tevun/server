@@ -14,7 +14,7 @@ After setting up tevun on your server you can upload an environment that applies
 Each created project generates a remote git that is already preconfigured to publish the application to the destination directory.
 That way we can configure the scripts to publish our changes in our stage or production environments.
 
-### Acompanhe
+### Follow
 - [Telegram](https://t.me/tevun)
 - [Twitter](https://twitter.com/tevunapp)
 - [Site](https://tevun.com)
