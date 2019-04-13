@@ -41,8 +41,6 @@ GIT_WORK_TREE="${APP}" git checkout -f ${BRANCH}
 
 cd ${APP}
 
-chown 1000:1000 . -R
-
 # hook post-checkout
 __plot "[4/5] Hook post-checkout"
 if [[ -f ".tevun/hooks/post-checkout.sh" ]]; then
