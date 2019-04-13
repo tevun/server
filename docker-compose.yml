@@ -54,8 +54,7 @@ services:
     privileged: true
     volumes:
       - .:/app
-      # magic remote http://ci:sbRNbgq5ChmxCwgA@<host>:8110/project/repo
-      - .users:/etc/ngnix/.users
+      - .docker/tevun/etc/nginx/.users:/etc/nginx/.users # magic remote http://ci:sbRNbgq5ChmxCwgA@<host>:8110/project/repo
       - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
       - 8110:8110
