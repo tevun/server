@@ -19,7 +19,10 @@ __plot "[3/6] Configure permissions of projects dir to user: '${TEVUN_USER_ID}'"
 chmod 755 ${TEVUN_DIR}/projects
 chown ${TEVUN_USER_ID}:${TEVUN_USER_ID} ${TEVUN_DIR}/projects
 
-__plot "[4/6] Create the symlink in '/projects'"
+__plot "[4/6] Create the symlink in '/projects' and new '.users' file"
+if [[ ! -f "${TEVUN_DIR}/.users" ]];then
+  cp ${TEVUN_DIR}/.docker/tevun/etc/nginx/.users ${TEVUN_DIR}/.users
+fi
 if [[ ! -h "/projects" ]];then
   ln -s ${TEVUN_DIR}/projects /projects
 fi
@@ -30,7 +33,7 @@ if [[ ! "${NETWORK_EXISTS}" ]];then
   docker network create --driver bridge reverse-proxy
 fi
 
-__plot "[5/6] Start docker containers"
+__plot "[6/6] Start docker containers"
 docker-compose down && docker-compose rm -f && docker-compose up -d
 
 __plot "[FINISH] ~> Tevun is ready with"

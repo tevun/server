@@ -1,5 +1,6 @@
 /.idea
 /.env
 /.key
+/.users
 /vendor
 *.cache
