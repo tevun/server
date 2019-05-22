@@ -56,7 +56,9 @@ rm ${APP}/.tevun-ready > /dev/null
 
 # INFO
 __plot "[REMOTE]"
-__plot " https://${TEVUN_HOST}:${TEVUN_PORT}/${PROJECT}/repo"
+__plot " ssh://${TEVUN_HOST}:${TEVUN_PORT_SSH}/${PROJECT}/repo"
+__plot " http://${TEVUN_HOST}:${TEVUN_PORT_HTTPS}/${PROJECT}/repo"
+__plot " https://${TEVUN_HOST}:${TEVUN_PORT_HTTPS}/${PROJECT}/repo"
 echo " "
 __plot "[FINISH] ~> Project '${PROJECT}' created"
 
