@@ -80,7 +80,7 @@ To perform the setup use the following command in the terminal, replacing <user>
   <img src="https://raw.githubusercontent.com/tevun/server/master/images/output-setup.png"/>
 </p>
 
-After perform this command you can access the your server in port 82 to see if it works.
+After perform this command you can access the your server in port what you choose to see if it works.
 <p align="center">
   <img src="https://raw.githubusercontent.com/tevun/server/master/images/setup.png"/>
 </p>
