@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+#read old new ref
+#author=$(git log -1 $ref --pretty=%an)
+#committer=$(git log -1 $ref --pretty=%cn)
+#echo author:$author
+#echo committer:$committer
