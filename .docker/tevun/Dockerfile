@@ -2,7 +2,8 @@
 FROM docker:18.06.3-ce
 
 # The container listens on port 8110, map as needed
-EXPOSE 8110
+EXPOSE 80
+EXPOSE 443
 
 # This is where the repositories will be stored, and
 # should be mounted from the host (or a volume container)
@@ -24,8 +25,10 @@ RUN apk add --update nginx && \
     apk add --update python-dev libffi-dev openssl-dev gcc libc-dev make && \
     rm -rf /var/cache/apk/*
 
-COPY ./etc/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./etc/nginx/.users /etc/nginx/.users
+COPY ./etc/nginx/tevun.conf /etc/nginx/tevun.conf
+COPY ./etc/nginx/ssl /etc/nginx/ssl
+COPY ./etc/nginx/nginx.conf /etc/nginx/nginx.conf
 
 RUN pip install docker-compose
 
