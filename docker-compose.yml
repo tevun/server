@@ -54,7 +54,10 @@ services:
     privileged: true
     volumes:
       - .:/app
-      - .users:/etc/nginx/.users # magic remote http://ci:sbRNbgq5ChmxCwgA@<host>:8110/<project>/repo
+      - .users:/etc/nginx/.users
       - /var/run/docker.sock:/var/run/docker.sock:ro
+#      - .docker/tevun/etc/nginx/local.tevun.com.crt:/etc/nginx/local.tevun.com.crt
+#      - .docker/tevun/etc/nginx/local.tevun.com.key:/etc/nginx/local.tevun.com.key
     ports:
-      - 8110:8110
+      - ${TEVUN_PORT_HTTP}:80
+      - ${TEVUN_PORT_HTTPS}:443
