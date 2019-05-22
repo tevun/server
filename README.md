@@ -80,7 +80,7 @@ To perform the setup use the following command in the terminal, replacing <user>
   <img src="https://raw.githubusercontent.com/tevun/server/master/images/output-setup.png"/>
 </p>
 
-After perform this command you can access the your server in port 8110 to see if it works.
+After perform this command you can access the your server in port 82 to see if it works.
 <p align="center">
   <img src="https://raw.githubusercontent.com/tevun/server/master/images/setup.png"/>
 </p>
@@ -143,7 +143,7 @@ We can get the branch setup of project repository to get the files to configure 
 
 ```
 # add the remote to your repo
-$ git remote add deploy https://<user>@<host>:8110/<project>/repo
+$ git remote add deploy https://<user>@<host>:<port>/<project>/repo
 # fetch the setup branch
 $ git fetch deploy +refs/heads/setup:refs/remotes/deploy/setup
 # get setup branch from remote
