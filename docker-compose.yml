@@ -22,6 +22,7 @@ services:
       - /etc/nginx/vhost.d:/etc/nginx/vhost.d
       - /usr/share/nginx/html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - .docker/nginx-proxy/etc/nginx/conf.d/server_tokens.conf:/etc/nginx/conf.d/server_tokens.conf:ro
       - .docker/nginx-proxy/etc/nginx/conf.d/client_max_body_size.conf:/etc/nginx/conf.d/client_max_body_size.conf:ro
       - .docker/nginx-proxy/etc/nginx/vhost.d/default_location:/etc/nginx/vhost.d/default_location:ro
     ports:
