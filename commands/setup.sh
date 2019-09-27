@@ -64,13 +64,17 @@ __plot "[4/7] Configure permissions of projects dir to user: '${TEVUN_USER_ID}'"
 chmod 755 ${TEVUN_DIR}/projects
 chown ${TEVUN_USER_ID}:${TEVUN_USER_ID} ${TEVUN_DIR}/projects
 
-__plot "[5/7] Create the symlink in '/projects' and new '.users' file"
-if [[ ! -h "/projects" ]];then
+__plot "[5/7] Create the symlink in '/projects', new '.users' file and 'docker-compose.yml'"
+if [[ ! -h /projects ]];then
   ln -s ${TEVUN_DIR}/projects /projects
 fi
-if [[ ! -f "${TEVUN_DIR}/.users" ]];then
-  cp ${TEVUN_DIR}/.docker/tevun/etc/nginx/.users ${TEVUN_DIR}/.users
+if [[ ! -f ${TEVUN_DIR}/.users ]];then
+  cp ${TEVUN_DIR}/.users.sample ${TEVUN_DIR}/.users
   chown ${TEVUN_USER_ID}:${TEVUN_USER_ID} ${TEVUN_DIR}/.users
+fi
+if [[ ! -f ${TEVUN_DIR}/docker-compose.yml ]];then
+  cp ${TEVUN_DIR}/docker-compose.yml.sample ${TEVUN_DIR}/docker-compose.yml
+  chown ${TEVUN_USER_ID}:${TEVUN_USER_ID} ${TEVUN_DIR}/docker-compose.yml
 fi
 
 __plot "[6/7] Create global docker network"
