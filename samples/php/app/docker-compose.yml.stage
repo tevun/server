@@ -13,7 +13,7 @@ volumes:
 
 services:
   {project}-mysql:
-    image: lyseontech/mysql:v5.7
+    image: mysql:5.7
     container_name: {project}-mysql
     restart: always
     networks:
@@ -28,7 +28,7 @@ services:
       - MYSQL_PASSWORD=password
 
   {project}-app:
-    image: lyseontech/php-apache-dev:v7.3
+    image: webdevops/php-apache:7.3
 #    build:
 #      dockerfile: ./.docker/app/Dockerfile
 #      context: .
