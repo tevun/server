@@ -29,6 +29,7 @@ services:
 
   {project}-app:
     image: webdevops/php-apache:7.3
+#    image: webdevops/php-apache-dev:7.3
 #    build:
 #      dockerfile: ./.docker/app/Dockerfile
 #      context: .
