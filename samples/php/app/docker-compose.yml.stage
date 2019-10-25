@@ -46,7 +46,7 @@ services:
       - {project}-mysql
     environment:
       - VIRTUAL_HOST={project}
-      - WEB_DOCUMENT_ROOT="/var/www/app/public"
+      - WEB_DOCUMENT_ROOT=/var/www/app/public
 #      - LETSENCRYPT_EMAIL=certificate@{project}
 #      - LETSENCRYPT_HOST={project}
 #      - PHP_DEBUGGER="xdebug"
