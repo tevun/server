@@ -19,36 +19,46 @@ cp .env.sample .env
 
 #TEVUN_USER_ID={TEVUN_USER_ID}
 
-echo -n " Host? (IP or FQDN) [localhost]: "
-read TEVUN_HOST
+if [[ "${@}" != *"--quiet"* ]]; then
+  echo -n " Host? (IP or FQDN) [localhost]: "
+  read TEVUN_HOST
+fi
 if [[ ! ${TEVUN_HOST} ]]; then
   TEVUN_HOST="localhost"
 fi
 sed -i "s/{TEVUN_HOST}/${TEVUN_HOST}/g" .env
 
-echo -n " HTTP port? [1080]: "
-read TEVUN_PORT_HTTP
+if [[ "${@}" != *"--quiet"* ]]; then
+  echo -n " HTTP port? [1080]: "
+  read TEVUN_PORT_HTTP
+fi
 if [[ ! ${TEVUN_PORT_HTTP} ]]; then
   TEVUN_PORT_HTTP="1080"
 fi
 sed -i "s/{TEVUN_PORT_HTTP}/${TEVUN_PORT_HTTP}/g" .env
 
-echo -n " HTTPS port? [10443]: "
-read TEVUN_PORT_HTTPS
+if [[ "${@}" != *"--quiet"* ]]; then
+  echo -n " HTTPS port? [10443]: "
+  read TEVUN_PORT_HTTPS
+fi
 if [[ ! ${TEVUN_PORT_HTTPS} ]]; then
   TEVUN_PORT_HTTPS="10443"
 fi
 sed -i "s/{TEVUN_PORT_HTTPS}/${TEVUN_PORT_HTTPS}/g" .env
 
-echo -n " SSH port? [1022]: "
-read TEVUN_PORT_SSH
+if [[ "${@}" != *"--quiet"* ]]; then
+  echo -n " SSH port? [1022]: "
+  read TEVUN_PORT_SSH
+fi
 if [[ ! ${TEVUN_PORT_SSH} ]]; then
   TEVUN_PORT_SSH="1022"
 fi
 sed -i "s/{TEVUN_PORT_SSH}/${TEVUN_PORT_SSH}/g" .env
 
-echo -n " User ID to be used in project? [1000]: "
-read TEVUN_USER_ID
+if [[ "${@}" != *"--quiet"* ]]; then
+  echo -n " User ID to be used in project? [1000]: "
+  read TEVUN_USER_ID
+fi
 if [[ ! ${TEVUN_USER_ID} ]]; then
   TEVUN_USER_ID="1000"
 fi
