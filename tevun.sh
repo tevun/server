@@ -71,9 +71,12 @@ case ${ACTION} in
 #  "down")
 #    source ./commands/down.sh ${TEVUN_DIR} ${2}
 #  ;;
-#  "projects")
-#    source ./commands/projects.sh ${TEVUN_DIR}
-#  ;;
+  "ll")
+    source ./commands/project/projects.sh ${TEVUN_DIR}
+  ;;
+  "pull")
+    source ./commands/project/pull.sh ${TEVUN_DIR}
+  ;;
 #  "password")
 #    source ./commands/utils/password.sh ${TEVUN_DIR}
 #  ;;
@@ -101,7 +104,8 @@ case ${ACTION} in
     echo "user       Create an user and configure system to use it"
     echo "ssh        Configure ssh with user that will be used to execute the commands"
 #    echo "password   Generate a random password"
-#    echo "projects    List the projects folder"
+    echo "ll         List the projects folder"
+    echo "pull       Pull new images of each projects and restart docker-compose"
 
     echo ""
     echo "Project Management Commands:"
