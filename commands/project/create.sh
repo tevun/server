@@ -26,7 +26,7 @@ __plot "[2/8] Create project app dir '${APP}'"
 cd ${APP}
 git init > /dev/null && git remote add origin ${REPO} > /dev/null
 __plot "[3/8] Initialize git master remote"
-git commit --allow-empty -m "Init" > /dev/null && git push origin master > /dev/null
+git commit --allow-empty -m "[init]" > /dev/null && git push origin master > /dev/null
 
 # CONFIGURE REPO
 __plot "[4/8] Configure hooks in repo"
@@ -57,7 +57,7 @@ rm ${APP}/.tevun-ready > /dev/null
 TEVUN_USER=$(getent passwd "${TEVUN_USER_ID}" | cut -d: -f1)
 # INFO
 __plot "[REMOTE]"
-__plot " ssh://${TEVUN_USER}@${TEVUN_HOST}:${TEVUN_PORT_SSH}/${PROJECT}/repo"
+__plot " ssh://${TEVUN_USER}@${TEVUN_HOST}:${TEVUN_PORT_SSH}/projects/${PROJECT}/repo"
 __plot " http://${TEVUN_HOST}:${TEVUN_PORT_HTTP}/${PROJECT}/repo"
 __plot " https://${TEVUN_HOST}:${TEVUN_PORT_HTTPS}/${PROJECT}/repo"
 echo " "
