@@ -59,6 +59,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
 #      - .docker/tevun/etc/nginx/local.tevun.com.crt:/etc/nginx/local.tevun.com.crt
 #      - .docker/tevun/etc/nginx/local.tevun.com.key:/etc/nginx/local.tevun.com.key
-    ports:
-      - ${TEVUN_PORT_HTTP}:80
-      - ${TEVUN_PORT_HTTPS}:443
+#    ports:
+#      - ${TEVUN_PORT_HTTP}:80
+#      - ${TEVUN_PORT_HTTPS}:443
