@@ -1,0 +1,58 @@
+version: '3'
+
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy
+  internal:
+    driver: bridge
+
+volumes:
+  {project}-mysql_data:
+    driver: local
+
+services:
+  {project}-mysql:
+    image: mysql:5.7
+    container_name: {project}-mysql
+    restart: always
+    networks:
+      - internal
+    volumes:
+      - {project}-mysql_data:/var/lib/mysql
+      - .:/var/www/app
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=username
+      - MYSQL_PASSWORD=password
+
+  {project}-app:
+    image: webdevops/php-apache:7.3
+#    image: webdevops/php-apache-dev:7.3
+#    build:
+#      dockerfile: ./.docker/app/Dockerfile
+#      context: .
+    container_name: {project}-app
+    restart: always
+    networks:
+      - reverse-proxy
+      - internal
+    volumes:
+      - .:/var/www/app
+    depends_on:
+      - {project}-mysql
+    links:
+      - {project}-mysql
+    environment:
+      - VIRTUAL_HOST={project}
+      - WEB_DOCUMENT_ROOT=/var/www/app/public
+#      - LETSENCRYPT_EMAIL=certificate@{project}
+#      - LETSENCRYPT_HOST={project}
+#      - PHP_DEBUGGER="xdebug"
+#      export XDEBUG_REMOTE_HOST=$(ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
+#      - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST}
+#      - XDEBUG_REMOTE_AUTOSTART=1
+#    expose:
+#      - 9000
+
