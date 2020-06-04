@@ -24,6 +24,7 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - .docker/nginx-proxy/etc/nginx/conf.d/server_tokens.conf:/etc/nginx/conf.d/server_tokens.conf:ro
       - .docker/nginx-proxy/etc/nginx/conf.d/client_max_body_size.conf:/etc/nginx/conf.d/client_max_body_size.conf:ro
+      - .docker/nginx-proxy/etc/nginx/conf.d/timeout.conf:/etc/nginx/conf.d/timeout.conf:ro
       - .docker/nginx-proxy/etc/nginx/vhost.d/default_location:/etc/nginx/vhost.d/default_location:ro
     ports:
       - 80:80
