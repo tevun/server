@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 CONFIGURE_DIR=${1}
+
+cd "${CONFIGURE_DIR}" || exit
+
+CONFIGURE_DIR=${1}
 CONFIGURE_PROJECT=${2}
 
 #cp ${APP_DIR}/.env.stage ${APP_DIR}/.env
@@ -26,3 +30,7 @@ find "${CONFIGURE_DIR}" -type f -exec sed -i "s/{port}/${CONFIGURE_PORT}/g" {} \
 find "${CONFIGURE_DIR}" -type f -exec sed -i "s/{database}/${CONFIGURE_ALIAS}/g" {} \; > /dev/null
 find "${CONFIGURE_DIR}" -type f -exec sed -i "s/{user}/${CONFIGURE_USER}/g" {} \; > /dev/null
 find "${CONFIGURE_DIR}" -type f -exec sed -i "s/{password}/${CONFIGURE_PASSWORD}/g" {} \; > /dev/null
+
+wget -O latest.tar.gz https://codeload.github.com/laravel/laravel/tar.gz/8.x
+
+/bin/tar -xzvf latest.tar.gz  --strip-components 1 -C .

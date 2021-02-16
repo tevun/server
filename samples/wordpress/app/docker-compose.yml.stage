@@ -8,32 +8,28 @@ networks:
     driver: bridge
 
 volumes:
-  {project}-mysql_data:
+  {alias}-mysql_data:
     driver: local
 
 services:
-  {project}-mysql:
+  {alias}-mysql:
     image: mysql:5.7
-    container_name: {project}-mysql
+    container_name: {alias}-mysql
     restart: always
     networks:
       - internal
     volumes:
-      - {project}-mysql_data:/var/lib/mysql
+      - {alias}-mysql_data:/var/lib/mysql
       - .:/var/www/app
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=wordpress
-      - MYSQL_USER=username
-      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
 
-  {project}-app:
+  {alias}-apache:
     image: webdevops/php-apache:7.3
-#    image: webdevops/php-apache-dev:7.3
-#    build:
-#      dockerfile: ./.docker/app/Dockerfile
-#      context: .
-    container_name: {project}-app
+    container_name: {alias}-apache
     restart: always
     networks:
       - reverse-proxy
@@ -41,18 +37,12 @@ services:
     volumes:
       - .:/var/www/app
     depends_on:
-      - {project}-mysql
+      - {alias}-mysql
     links:
-      - {project}-mysql
+      - {alias}-mysql
     environment:
       - VIRTUAL_HOST={project}
+      - VIRTUAL_PORT=80
       - WEB_DOCUMENT_ROOT=/var/www/app/public
-#      - LETSENCRYPT_EMAIL=certificate@{project}
+#      - LETSENCRYPT_EMAIL=it@{project}
 #      - LETSENCRYPT_HOST={project}
-#      - PHP_DEBUGGER="xdebug"
-#      export XDEBUG_REMOTE_HOST=$(ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
-#      - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST}
-#      - XDEBUG_REMOTE_AUTOSTART=1
-#    expose:
-#      - 9000
-

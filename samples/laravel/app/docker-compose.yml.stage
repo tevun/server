@@ -23,13 +23,13 @@ services:
       - .:/var/www/app
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
 
-  {alias}-apache:
-    image: webdevops/php-apache:7.3
-    container_name: {alias}-apache
+  {alias}-nginx:
+    image: webdevops/php-nginx:8
+    container_name: {alias}-nginx
     restart: always
     networks:
       - reverse-proxy

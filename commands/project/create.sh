@@ -46,7 +46,7 @@ git add --all > /dev/null && git commit --allow-empty -m "Setup" > /dev/null
 
 # CONFIGURE SAMPLE
 __plot "[7/8] Configure sample project '${SAMPLE}'"
-bash ${SAMPLES}/${SAMPLE}/configure.sh ${APP} > /dev/null
+bash ${SAMPLES}/${SAMPLE}/configure.sh ${APP} ${PROJECT}
 
 # INIT APP
 __plot "[8/8] Configure setup branch"
