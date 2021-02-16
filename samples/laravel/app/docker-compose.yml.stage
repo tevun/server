@@ -14,7 +14,7 @@ volumes:
 services:
   {alias}-mysql:
     image: mysql:5.7
-    container_name: {alias}-mysql
+    container_name: ${DB_HOST}
     restart: always
     networks:
       - internal
