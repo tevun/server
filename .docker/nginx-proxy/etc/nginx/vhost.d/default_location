@@ -1,12 +1,11 @@
 if ($request_method = 'OPTIONS') {
-    # basic settings
     add_header 'Access-Control-Allow-Origin' "$http_origin" always;
-    add_header 'Access-Control-Allow-Methods' 'GET,POST,PUT,PATCH,DELETE,OPTIONS' always;
-    add_header 'Access-Control-Allow-Headers' 'Accept,Authorization,Bearer,Cache-Control,Content-Type,Device,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With' always;
+    add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS' always;
+    add_header 'Access-Control-Allow-Headers' 'Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With,Bearer,Device,Context,PrivateToken,Meta' always;
     add_header 'Access-Control-Allow-Credentials' 'true' always;
 
     # required to be able to read Authorization header in frontend
-    add_header 'Access-Control-Expose-Headers' 'Authorization,Bearer,Device';
+    add_header 'Access-Control-Expose-Headers' 'Authorization,Bearer,Device,Context,PrivateToken,Meta';
 
     # Tell client that this pre-flight info is valid for 20 days
     add_header 'Access-Control-Max-Age' 1728000;
@@ -14,3 +13,4 @@ if ($request_method = 'OPTIONS') {
     add_header 'Content-Length' 0;
     return 204;
 }
+
