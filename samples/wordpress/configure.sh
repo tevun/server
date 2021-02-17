@@ -7,9 +7,6 @@ cd "${CONFIGURE_DIR}" || exit
 CONFIGURE_DIR=${1}
 CONFIGURE_PROJECT=${2}
 
-#cp ${APP_DIR}/.env.stage ${APP_DIR}/.env
-#cp ${APP_DIR}/docker-compose.yml.stage ${APP_DIR}/docker-compose.yml
-
 alias=$(echo "${CONFIGURE_PROJECT}" | cut -d. -f1)
 echo -n "Type an alias to project [${alias}]: "
 read -r CONFIGURE_ALIAS
@@ -38,4 +35,6 @@ wget https://wordpress.org/latest.tar.gz
 /bin/mv wordpress/ public/
 
 cp .env.stage .env
+cat .env
 cp docker-compose.yml.stage docker-compose.yml
+cat docker-compose.yml
