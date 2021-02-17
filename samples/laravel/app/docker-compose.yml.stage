@@ -21,6 +21,7 @@ services:
     volumes:
       - {alias}-mysql_data:/var/lib/mysql
       - .:/var/www/app
+    working_dir: /var/www/app
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${DB_DATABASE}
@@ -36,6 +37,7 @@ services:
       - internal
     volumes:
       - .:/var/www/app
+    working_dir: /var/www/app
     depends_on:
       - {alias}-mysql
     links:
