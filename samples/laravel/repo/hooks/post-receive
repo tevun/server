@@ -1,22 +1,41 @@
 #!/usr/bin/env bash
 
-DIR_NAME=$(dirname $(readlink -f ${0}))
-BASE=$(dirname $(readlink -f "${DIR_NAME}/../.."))
+DIR_NAME=$(dirname "$(readlink -f "${0}")")
+BASE=$(dirname "$(readlink -f "${DIR_NAME}/../..")")
 PROJECT="{project}"
 APP="${BASE}/${PROJECT}/app"
 BRANCH="master"
 
 function __plot
 {
-  printf "\033[0;32m${1}\033[0m \n"
+  printf "\033[0;32m%s\033[0m \n" "${1}"
 }
 
-cd ${APP}
+cd "${APP}" || exit
 
 # hook pre-checkout
 __plot "[1/5] Hook 'pre-checkout'"
 if [[ -f ".tevun/hooks/pre-checkout.sh" ]]; then
-  bash .tevun/hooks/pre-checkout.sh ${APP} ${PROJECT}
+  bash .tevun/hooks/pre-checkout.sh "${APP}" "${PROJECT}"
+fi
+
+cd "$(dirname "${DIR_NAME}")" || exit
+
+__plot "[2/5] Checkout"
+GIT_WORK_TREE="${APP}" git checkout -f ${BRANCH}
+
+cd "${APP}" || exit
+
+# hook post-checkout
+__plot "[3/5] Hook post-checkout"
+if [[ -f ".tevun/hooks/post-checkout.sh" ]]; then
+  bash .tevun/hooks/post-checkout.sh "${APP}" "${PROJECT}"
+fi
+
+# hook install
+__plot "[4/5] Hook 'install'"
+if [[ -f ".tevun/hooks/install.sh" ]]; then
+  bash .tevun/hooks/install.sh "${APP}" "${PROJECT}"
 fi
 
 TEVUN_IS_READY="yes"
@@ -26,29 +45,10 @@ if [[ ! -f ${READY} ]]; then
 fi
 
 # hook setup
-__plot "[2/5] Hook 'setup' (is ready: ${TEVUN_IS_READY})"
+__plot "[5/5] Hook 'setup' (is ready: ${TEVUN_IS_READY})"
 if [[ -f ".tevun/hooks/setup.sh" ]]; then
   if [[ ${TEVUN_IS_READY} = "no" ]]; then
-    bash .tevun/hooks/setup.sh ${APP} ${PROJECT}
+    bash .tevun/hooks/setup.sh "${APP}" "${PROJECT}"
     touch ${READY}
   fi
-fi
-
-cd $(dirname ${DIR_NAME})
-
-__plot "[3/5] Checkout"
-GIT_WORK_TREE="${APP}" git checkout -f ${BRANCH}
-
-cd ${APP}
-
-# hook post-checkout
-__plot "[4/5] Hook post-checkout"
-if [[ -f ".tevun/hooks/post-checkout.sh" ]]; then
-  bash .tevun/hooks/post-checkout.sh ${APP} ${PROJECT}
-fi
-
-# hook install
-__plot "[5/5] Hook 'install'"
-if [[ -f ".tevun/hooks/install.sh" ]]; then
-  bash .tevun/hooks/install.sh ${APP} ${PROJECT}
 fi
