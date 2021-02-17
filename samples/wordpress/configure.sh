@@ -33,7 +33,7 @@ find "${CONFIGURE_DIR}" -type f -exec sed -i "s/{password}/${CONFIGURE_PASSWORD}
 
 wget https://wordpress.org/latest.tar.gz
 
-/bin/tar -xzvf latest.tar.gz
+/bin/tar -xzf latest.tar.gz
 /bin/rm -rf public
 /bin/mv wordpress/ public/
 
