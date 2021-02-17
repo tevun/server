@@ -28,7 +28,7 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD}
 
   {alias}-nginx:
-    image: webdevops/php-nginx:8
+    image: webdevops/php-nginx:8.0
     container_name: {alias}-nginx
     restart: always
     networks:

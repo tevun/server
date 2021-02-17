@@ -33,4 +33,7 @@ find "${CONFIGURE_DIR}" -type f -exec sed -i "s/{password}/${CONFIGURE_PASSWORD}
 
 wget -O latest.tar.gz https://codeload.github.com/laravel/laravel/tar.gz/8.x
 
-/bin/tar -xzvf latest.tar.gz  --strip-components 1 -C .
+/bin/tar -xzf latest.tar.gz  --strip-components 1 -C .
+
+cp .env.stage .env
+cp docker-compose.yml.stage docker-compose.yml

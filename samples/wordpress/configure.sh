@@ -35,6 +35,4 @@ wget https://wordpress.org/latest.tar.gz
 /bin/mv wordpress/ public/
 
 cp .env.stage .env
-cat .env
 cp docker-compose.yml.stage docker-compose.yml
-cat docker-compose.yml
