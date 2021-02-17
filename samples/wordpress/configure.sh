@@ -36,3 +36,6 @@ wget https://wordpress.org/latest.tar.gz
 /bin/tar -xzvf latest.tar.gz
 /bin/rm -rf public
 /bin/mv wordpress/ public/
+
+cp .env.stage .env
+cp docker-compose.yml.stage docker-compose.yml
