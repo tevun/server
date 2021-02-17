@@ -39,14 +39,14 @@ __plot "[5/8] Configure app dir"
 cp -TRv ${SAMPLES}/${SAMPLE}/app/ ${APP}/ > /dev/null
 find ${APP} -type f -exec sed -i "s/{project}/${PROJECT}/g" {} \; > /dev/null
 
+# CONFIGURE SAMPLE
+__plot "[6/8] Configure sample project '${SAMPLE}'"
+bash ${SAMPLES}/${SAMPLE}/configure.sh ${APP} ${PROJECT}
+
 # PREPARE APP
-__plot "[6/8] Create setup branch"
+__plot "[7/8] Create setup branch"
 git checkout -b setup > /dev/null
 git add --all > /dev/null && git commit --allow-empty -m "Setup" > /dev/null
-
-# CONFIGURE SAMPLE
-__plot "[7/8] Configure sample project '${SAMPLE}'"
-bash ${SAMPLES}/${SAMPLE}/configure.sh ${APP} ${PROJECT}
 
 # INIT APP
 __plot "[8/8] Configure setup branch"
