@@ -26,3 +26,6 @@ find "${CONFIGURE_DIR}" -type f -exec sed -i "s/{port}/${CONFIGURE_PORT}/g" {} \
 find "${CONFIGURE_DIR}" -type f -exec sed -i "s/{database}/${CONFIGURE_ALIAS}/g" {} \; > /dev/null
 find "${CONFIGURE_DIR}" -type f -exec sed -i "s/{user}/${CONFIGURE_USER}/g" {} \; > /dev/null
 find "${CONFIGURE_DIR}" -type f -exec sed -i "s/{password}/${CONFIGURE_PASSWORD}/g" {} \; > /dev/null
+
+cp .env.stage .env
+cp docker-compose.yml.stage docker-compose.yml
