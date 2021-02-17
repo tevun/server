@@ -13,10 +13,10 @@ if [[ -z "${CONFIGURE_ALIAS}" ]]; then
   CONFIGURE_ALIAS="${alias}"
 fi
 
-CONFIGURE_ROOT="$(date +%s | sha256sum | base64 | head -c 32 ; echo)"
+CONFIGURE_ROOT="$(date +%s | sha256sum | base64 | head -c 16 ; echo)"
 CONFIGURE_PORT="3306"
-CONFIGURE_USER="$(date +%s | sha1sum | base64 | head -c 10 ; echo)"
-CONFIGURE_PASSWORD="$(date +%s | md5sum | base64 | head -c 32 ; echo)"
+CONFIGURE_USER="$(date +%s | sha1sum | base64 | head -c 8 ; echo)"
+CONFIGURE_PASSWORD="$(date +%s | md5sum | base64 | head -c 16 ; echo)"
 
 # find ${APP} -type f -exec sed -i "s/{project}/${CONFIGURE_PROJECT}/g" {} \; > /dev/null
 find "${CONFIGURE_DIR}" -type f -exec sed -i "s/{alias}/${CONFIGURE_ALIAS}/g" {} \; > /dev/null
