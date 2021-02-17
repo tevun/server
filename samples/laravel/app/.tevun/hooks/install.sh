@@ -6,4 +6,3 @@ cd "${1}" || exit
 
 docker-compose exec "{alias}-nginx" bash -c "su -c \"composer install --no-interaction -optimize-autoloader\" application"
 docker-compose exec "{alias}-nginx" bash -c "su -c \"php artisan migrate --force\" application"
-
