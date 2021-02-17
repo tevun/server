@@ -14,7 +14,7 @@ volumes:
 services:
   {alias}-mysql:
     image: mysql:5.7
-    container_name: ${DB_HOST}
+    container_name: {alias}-mysql
     restart: always
     networks:
       - internal
@@ -23,10 +23,10 @@ services:
       - .:/var/www/app
     working_dir: /var/www/app
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${DB_DATABASE}
-      - MYSQL_USER=${DB_USERNAME}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD={root}
+      - MYSQL_DATABASE={database}
+      - MYSQL_USER={user}
+      - MYSQL_PASSWORD={password}
 
   {alias}-nginx:
     image: webdevops/php-nginx:8.0

@@ -29,10 +29,6 @@ cd "${APP}" || exit
 # hook post-checkout
 __plot "[3/5] Hook post-checkout"
 if [[ -f ".tevun/hooks/post-checkout.sh" ]]; then
-  echo "debug"
-  cat .env
-  echo "debug"
-  cat docker-compose.yml
   bash .tevun/hooks/post-checkout.sh "${APP}" "${PROJECT}"
 fi
 

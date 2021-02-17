@@ -14,28 +14,30 @@ volumes:
 services:
   {alias}-mysql:
     image: mysql:5.7
-    container_name: ${MYSQL_HOST}
+    container_name: {alias}-mysql
     restart: always
     networks:
       - internal
     volumes:
       - {alias}-mysql_data:/var/lib/mysql
       - .:/var/www/app
+    working_dir: /var/www/app
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD={root}
+      - MYSQL_DATABASE={database}
+      - MYSQL_USER={user}
+      - MYSQL_PASSWORD={password}
 
-  {alias}-apache:
-    image: webdevops/php-apache:7.3
-    container_name: {alias}-apache
+  {alias}-nginx:
+    image: webdevops/php-nginx:8.0
+    container_name: {alias}-nginx
     restart: always
     networks:
       - reverse-proxy
       - internal
     volumes:
       - .:/var/www/app
+    working_dir: /var/www/app
     depends_on:
       - {alias}-mysql
     links:
