@@ -65,14 +65,23 @@ Then clone the repository and create the symlink so the `tevun` command is avail
 
 It is important to avoid using `root` via SSH. We recommend creating a limited user, adding it to the `docker` and `sudo` groups, and using that account from then on.
 
-You may use the `vps-bootstrap` scripts (separate repo) for a complete server bootstrap (zsh setup, sudoer configuration, etc.). Tevun also ships with two thin helpers that remain available:
+Tevun ships with two helpers for that:
 
 ```
-# tevun user <name>     # creates the user and adds it to docker
-# tevun ssh <name>      # configures sshd to allow the new user
+# tevun user <name>     # creates <name>, adds it to the 'docker' and 'sudo' groups
+# tevun ssh <name>      # copies your authorized_keys to <name>, grants sudo,
+                        # disables root SSH login and restricts access to <name>
 ```
 
-These helpers are kept for compatibility but are not required by `tevun setup`.
+Typical flow on a fresh server (run as root):
+
+```
+# tevun user deploy
+# passwd deploy            # set a password (used by sudo)
+# tevun ssh deploy
+```
+
+`tevun ssh` writes a drop-in at `/etc/ssh/sshd_config.d/99-tevun.conf` with `PermitRootLogin no` and `AllowUsers <name>`, validates with `sshd -t`, and reloads sshd. **Open a new terminal and confirm `ssh <name>@<host>` works before closing the current root session** — if something is wrong the drop-in is rolled back automatically, but a broken config is faster to fix while you still have a session.
 
 #### Tevun setup
 
