@@ -19,8 +19,8 @@ TEVUN_MESSAGE="The project '${PROJECT}' was not destroyed"
 if [[ ${DESTROY} = "yes" ]]; then
   cd "${APP}" || exit
   if [[ -f "docker-compose.yml" ]]; then
-    docker-compose down --volumes
-    docker-compose rm -f -v
+    docker compose down --volumes
+    docker compose rm -f -v
   fi
   rm -rf "${PROJECTS:?}/${PROJECT}"
   TEVUN_MESSAGE="Project '${PROJECT}' destroyed"

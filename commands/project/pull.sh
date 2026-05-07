@@ -29,7 +29,7 @@ for f in *; do
   done
 
   cd ${PROJECTS}/${f}/app
-  docker-compose down && docker-compose up -d
+  docker compose down && docker compose up -d
   cd ${PROJECTS}
 done
 

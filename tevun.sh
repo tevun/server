@@ -1,21 +1,22 @@
 #!/usr/bin/env bash
 
 ACTION=${1}
-TEVUN_DIR=$(dirname $(readlink -f ${0}))
+TEVUN_DIR=$(dirname "$(readlink -f "${0}")")
+TEVUN_CONTAINERS_DIR="${TEVUN_DIR}/.docker"
 
-cd ${TEVUN_DIR}
+cd "${TEVUN_DIR}" || exit 1
 source ./tevun-functions.sh
 
-if [[ ! -f .env ]]; then
-  cp .env.sample .env
+if [[ ! -f "${TEVUN_CONTAINERS_DIR}/.env" ]]; then
+  cp "${TEVUN_CONTAINERS_DIR}/.env.sample" "${TEVUN_CONTAINERS_DIR}/.env"
 fi
-source .env
+source "${TEVUN_CONTAINERS_DIR}/.env"
 
-if [[ ! -f .key ]]; then
+if [[ ! -f "${TEVUN_CONTAINERS_DIR}/.key" ]]; then
   TEVUN_UUID=$(cat /proc/sys/kernel/random/uuid)
-  echo ${TEVUN_UUID} > .key
+  echo "${TEVUN_UUID}" > "${TEVUN_CONTAINERS_DIR}/.key"
 fi
-TEVUN_UUID=$(cat .key)
+TEVUN_UUID=$(cat "${TEVUN_CONTAINERS_DIR}/.key")
 
 case ${ACTION} in
   "setup")
@@ -38,9 +39,6 @@ case ${ACTION} in
   "ssh")
     source ./commands/credential/ssh.sh
   ;;
-  "register")
-    source ./commands/credential/register.sh
-  ;;
 
   "lets-encrypt/renew")
     source ./commands/utils/lets-encrypt/renew.sh
@@ -52,38 +50,13 @@ case ${ACTION} in
   "ubuntu/locale")
     source ./commands/utils/ubuntu/locale.sh
   ;;
-  "requirement")
-    INSTALLER="${TEVUN_DIR}/installers/${2}.sh"
-    if [[ -f ${INSTALLER} ]];then
-      source ${INSTALLER}
-    fi
-  ;;
 
-#  "start")
-#    source ./commands/start.sh ${TEVUN_DIR} ${2}
-#  ;;
-#  "stop")
-#    source ./commands/stop.sh ${TEVUN_DIR} ${2}
-#  ;;
-#  "up")
-#    source ./commands/up.sh ${TEVUN_DIR} ${2}
-#  ;;
-#  "down")
-#    source ./commands/down.sh ${TEVUN_DIR} ${2}
-#  ;;
   "ll")
-    source ./commands/project/projects.sh ${TEVUN_DIR}
+    source ./commands/project/projects.sh "${TEVUN_DIR}"
   ;;
   "pull")
-    source ./commands/project/pull.sh ${TEVUN_DIR}
+    source ./commands/project/pull.sh "${TEVUN_DIR}"
   ;;
-#  "password")
-#    source ./commands/utils/password.sh ${TEVUN_DIR}
-#  ;;
-
-#  "compose")
-#    source ./commands/utils/compose.sh ${TEVUN_DIR} ${2}
-#  ;;
 
   *)
     echo "                       ____        ____"
@@ -103,25 +76,19 @@ case ${ACTION} in
     echo "ps         Show running containers"
     echo "user       Create an user and configure system to use it"
     echo "ssh        Configure ssh with user that will be used to execute the commands"
-#    echo "password   Generate a random password"
     echo "ll         List the projects folder"
-    echo "pull       Pull new images of each projects and restart docker-compose"
+    echo "pull       Pull new images of each project and restart"
 
     echo ""
     echo "Project Management Commands:"
     echo "create     Create project"
     echo "destroy    Destroy project"
-#    echo "start      Apply start on project"
-#    echo "stop       Apply stop on project"
-#    echo "up         Apply up on project"
-#    echo "down       Apply up on project"
 
     echo ""
     echo "Util Commands:"
     echo "ubuntu/locale         Fix locale on Ubuntu Server"
     echo "lets-encrypt/renew    Force renew certificates"
     echo "lets-encrypt/status   Show certificate status"
-    echo "requirement {distro}  Install requirements to your distro [ubuntu, debian, etc]"
     echo ""
   ;;
 esac
@@ -132,9 +99,9 @@ function __tevun
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
-    opts="setup password user ps projects \
-          create destroy start stop up down \
-          ubuntu/locale lets-encrypt/renew lets-encrypt/status requirement \
+    opts="setup user ssh ps ll pull \
+          create destroy \
+          ubuntu/locale lets-encrypt/renew lets-encrypt/status \
           help"
     if [[ ${cur} == * ]] ; then
         COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
