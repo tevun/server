@@ -23,6 +23,10 @@ TEVUN_USER_GROUP=$(id -gn "${TEVUN_USER_NAME}")
 __plot "[1/7] Configure git"
 cd "${TEVUN_DIR}" || exit 1
 
+if ! git config --system --get-all safe.directory 2>/dev/null | grep -qx "${TEVUN_DIR}"; then
+  git config --system --add safe.directory "${TEVUN_DIR}"
+fi
+
 if [[ -z "$(git config --local --get user.name)" ]]; then
   git config --local user.name "${TEVUN_USER_NAME}"
 fi
