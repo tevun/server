@@ -1,0 +1,50 @@
+name: tevun
+
+networks:
+  reverse-proxy:
+    external: true
+
+services:
+
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:1.10
+    container_name: nginx-proxy
+    restart: unless-stopped
+    networks:
+      - reverse-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - certs:/etc/nginx/certs:ro
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx-proxy/etc/nginx/conf.d/server_tokens.conf:/etc/nginx/conf.d/server_tokens.conf:ro
+      - ./nginx-proxy/etc/nginx/conf.d/client_max_body_size.conf:/etc/nginx/conf.d/client_max_body_size.conf:ro
+      - ./nginx-proxy/etc/nginx/conf.d/timeout.conf:/etc/nginx/conf.d/timeout.conf:ro
+      - ./nginx-proxy/etc/nginx/vhost.d/default_location:/etc/nginx/vhost.d/default_location:ro
+
+  acme-companion:
+    image: nginxproxy/acme-companion:2.6
+    container_name: acme-companion
+    restart: unless-stopped
+    depends_on:
+      - nginx-proxy
+    networks:
+      - reverse-proxy
+    environment:
+      - DEFAULT_EMAIL=${TEVUN_USER_EMAIL}
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - acme:/etc/acme.sh
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+volumes:
+  certs:
+  vhost:
+  html:
+  acme:

@@ -1,9 +1,8 @@
 /.idea
 
-/.env
-/.key
-/.users
-/docker-compose.yml
+/.docker/.env
+/.docker/.key
+/.docker/.users
+/.docker/docker-compose.yml
 
-/vendor
 *.cache
