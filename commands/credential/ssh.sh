@@ -70,6 +70,11 @@ fi
 cat > "${TEVUN_SSHD_DROPIN}" <<EOF
 PermitRootLogin no
 AllowUsers ${TEVUN_ALLOW_USERS}
+
+Match User root
+    PasswordAuthentication no
+    PubkeyAuthentication no
+    KbdInteractiveAuthentication no
 EOF
 chmod 644 "${TEVUN_SSHD_DROPIN}"
 
