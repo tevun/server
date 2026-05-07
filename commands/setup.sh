@@ -1,92 +1,108 @@
 #!/bin/bash
 
-cd ${TEVUN_DIR}
-
-if [[ "${2}" ]]; then
-  TEVUN_USER_ID=${2}
+if [[ $EUID -ne 0 ]] && [[ ! -w "${TEVUN_DIR}" ]]; then
+  echo "Setup requires write access to ${TEVUN_DIR}. Run with: sudo tevun setup" >&2
+  exit 1
 fi
+
+INTERACTIVE=true
+for arg in "$@"; do
+  if [[ "$arg" == "--quiet" ]]; then
+    INTERACTIVE=false
+    break
+  fi
+done
+
+if [[ -n "${SUDO_USER}" ]]; then
+  TEVUN_USER_NAME="${SUDO_USER}"
+else
+  TEVUN_USER_NAME=$(id -u -n)
+fi
+TEVUN_USER_GROUP=$(id -gn "${TEVUN_USER_NAME}")
 
 __plot "[1/7] Configure git"
-git config --global user.email ${TEVUN_USER_EMAIL} >> /dev/null
-git config --global user.name ${TEVUN_USER_NAME} >> /dev/null
+cd "${TEVUN_DIR}" || exit 1
 
-__plot "[2/7] Define env properties"
+if [[ -z "$(git config --local --get user.name)" ]]; then
+  git config --local user.name "${TEVUN_USER_NAME}"
+fi
+
+TEVUN_USER_EMAIL=$(git config --local --get user.email)
+if [[ -z "${TEVUN_USER_EMAIL}" ]]; then
+  if $INTERACTIVE; then
+    echo -n " Git user email? "
+    read -r TEVUN_USER_EMAIL
+  fi
+  TEVUN_USER_EMAIL=${TEVUN_USER_EMAIL:-"setup@tevun.com"}
+  git config --local user.email "${TEVUN_USER_EMAIL}"
+fi
+
+TEVUN_DEFAULT_BRANCH=$(git config --local --get init.defaultBranch)
+if [[ -z "${TEVUN_DEFAULT_BRANCH}" ]]; then
+  if $INTERACTIVE; then
+    echo -n " Git default branch? [main] "
+    read -r TEVUN_DEFAULT_BRANCH
+  fi
+  TEVUN_DEFAULT_BRANCH=${TEVUN_DEFAULT_BRANCH:-main}
+  git config --local init.defaultBranch "${TEVUN_DEFAULT_BRANCH}"
+fi
+
+__plot "[2/7] Define env properties in '${TEVUN_CONTAINERS_DIR}/.env'"
+cd "${TEVUN_CONTAINERS_DIR}" || exit 1
 cp .env.sample .env
-#TEVUN_HOST={TEVUN_HOST}
-#TEVUN_PORT_HTTP={TEVUN_PORT_HTTP}
-#TEVUN_PORT_HTTPS={TEVUN_PORT_HTTPS}
-#TEVUN_PORT_SSH={TEVUN_PORT_SSH}
 
-#TEVUN_USER_ID={TEVUN_USER_ID}
-
-TEVUN_HOST="localhost"
-if [[ "${@}" != *"--quiet"* ]]; then
-  echo -n " Host? (IP or FQDN) [localhost]: "
-  read TEVUN_HOST
-fi
-sed -i "s/{TEVUN_HOST}/${TEVUN_HOST}/g" .env
-
-TEVUN_PORT_HTTP="1080"
-if [[ "${@}" != *"--quiet"* ]]; then
-  echo -n " HTTP port? [1080]: "
-  read TEVUN_PORT_HTTP
-fi
-sed -i "s/{TEVUN_PORT_HTTP}/${TEVUN_PORT_HTTP}/g" .env
-
-TEVUN_PORT_HTTPS="10443"
-if [[ "${@}" != *"--quiet"* ]]; then
-  echo -n " HTTPS port? [10443]: "
-  read TEVUN_PORT_HTTPS
-fi
-sed -i "s/{TEVUN_PORT_HTTPS}/${TEVUN_PORT_HTTPS}/g" .env
-
-TEVUN_PORT_SSH="1022"
-if [[ "${@}" != *"--quiet"* ]]; then
-  echo -n " SSH port? [1022]: "
-  read TEVUN_PORT_SSH
-fi
-sed -i "s/{TEVUN_PORT_SSH}/${TEVUN_PORT_SSH}/g" .env
-
-TEVUN_USER_ID="1000"
-if [[ "${@}" != *"--quiet"* ]]; then
-  echo -n " User ID to be used in project? [1000]: "
-  read TEVUN_USER_ID
-fi
-sed -i "s/{TEVUN_USER_ID}/${TEVUN_USER_ID}/g" .env
-
-chown ${TEVUN_USER_ID}:${TEVUN_USER_ID} ${TEVUN_DIR}/.env
-
-__plot "[3/7] Create projects dir in '${TEVUN_DIR}/projects'"
-if [[ ! -d "${TEVUN_DIR}/projects" ]];then
-  mkdir -p ${TEVUN_DIR}/projects
+DEFAULT_HOST=$(curl -4 -s --max-time 3 icanhazip.com 2>/dev/null || echo "localhost")
+TEVUN_HOST="${DEFAULT_HOST}"
+if $INTERACTIVE; then
+  echo -n " Host? (IP or FQDN) [${DEFAULT_HOST}]: "
+  read -r INPUT_HOST
+  TEVUN_HOST=${INPUT_HOST:-${DEFAULT_HOST}}
 fi
 
-__plot "[4/7] Configure permissions of projects dir to user: '${TEVUN_USER_ID}'"
-chmod 755 ${TEVUN_DIR}/projects
-chown ${TEVUN_USER_ID}:${TEVUN_USER_ID} ${TEVUN_DIR}/projects
-
-__plot "[5/7] Create the symlink in '/projects', new '.users' file and 'docker-compose.yml'"
-if [[ ! -h /projects ]];then
-  ln -s ${TEVUN_DIR}/projects /projects
-fi
-if [[ ! -f ${TEVUN_DIR}/.users ]];then
-  cp ${TEVUN_DIR}/.users.sample ${TEVUN_DIR}/.users
-  chown ${TEVUN_USER_ID}:${TEVUN_USER_ID} ${TEVUN_DIR}/.users
-fi
-if [[ ! -f ${TEVUN_DIR}/docker-compose.yml ]];then
-  cp ${TEVUN_DIR}/docker-compose.yml.sample ${TEVUN_DIR}/docker-compose.yml
-  chown ${TEVUN_USER_ID}:${TEVUN_USER_ID} ${TEVUN_DIR}/docker-compose.yml
+DEFAULT_SSH_PORT=$(grep -E "^Port|^#Port" /etc/ssh/sshd_config 2>/dev/null | head -1 | awk '{print $2}')
+DEFAULT_SSH_PORT=${DEFAULT_SSH_PORT:-22}
+TEVUN_PORT_SSH="${DEFAULT_SSH_PORT}"
+if $INTERACTIVE; then
+  echo -n " SSH port? [${DEFAULT_SSH_PORT}]: "
+  read -r INPUT_SSH
+  TEVUN_PORT_SSH=${INPUT_SSH:-${DEFAULT_SSH_PORT}}
 fi
 
-__plot "[6/7] Create global docker network"
-NETWORK_EXISTS=$(docker network ls -q -f name=reverse-proxy)
-if [[ ! "${NETWORK_EXISTS}" ]];then
+sed -i "s|{TEVUN_DEFAULT_BRANCH}|${TEVUN_DEFAULT_BRANCH}|g" .env
+sed -i "s|{TEVUN_USER_EMAIL}|${TEVUN_USER_EMAIL}|g" .env
+sed -i "s|{TEVUN_USER_NAME}|${TEVUN_USER_NAME}|g" .env
+sed -i "s|{TEVUN_USER_GROUP}|${TEVUN_USER_GROUP}|g" .env
+sed -i "s|{TEVUN_HOST}|${TEVUN_HOST}|g" .env
+sed -i "s|{TEVUN_PORT_SSH}|${TEVUN_PORT_SSH}|g" .env
+
+chown "${TEVUN_USER_NAME}:${TEVUN_USER_GROUP}" .env
+
+__plot "[3/7] Create projects dir at '${TEVUN_DIR}/projects'"
+mkdir -p "${TEVUN_DIR}/projects"
+chown "${TEVUN_USER_NAME}:${TEVUN_USER_GROUP}" "${TEVUN_DIR}/projects"
+chmod 755 "${TEVUN_DIR}/projects"
+
+__plot "[4/7] Symlink '/projects' → '${TEVUN_DIR}/projects'"
+if [[ ! -h /projects ]]; then
+  ln -s "${TEVUN_DIR}/projects" /projects
+fi
+
+__plot "[5/7] Generate '${TEVUN_CONTAINERS_DIR}/docker-compose.yml'"
+if [[ ! -f "${TEVUN_CONTAINERS_DIR}/docker-compose.yml" ]]; then
+  cp "${TEVUN_CONTAINERS_DIR}/docker-compose.yml.sample" "${TEVUN_CONTAINERS_DIR}/docker-compose.yml"
+  chown "${TEVUN_USER_NAME}:${TEVUN_USER_GROUP}" "${TEVUN_CONTAINERS_DIR}/docker-compose.yml"
+fi
+
+__plot "[6/7] Ensure 'reverse-proxy' docker network"
+if ! docker network ls --format '{{.Name}}' | grep -qx reverse-proxy; then
   docker network create --driver bridge reverse-proxy
 fi
 
 __plot "[7/7] Start docker containers"
-docker-compose down && docker-compose rm -f && docker-compose up -d
+cd "${TEVUN_CONTAINERS_DIR}" || exit 1
+docker compose down --remove-orphans 2>/dev/null
+docker compose up -d
 
-__plot "[FINISH] ~> Tevun is ready with"
-__plot " Your server key is: '${TEVUN_UUID}'"
-__plot " Use 'tevun help'"
+__plot "[FINISH] ~> Tevun is ready"
+__plot " Server key: '${TEVUN_UUID}'"
+__plot " Try: tevun help"
