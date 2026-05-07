@@ -75,6 +75,7 @@ Match User root
     PasswordAuthentication no
     PubkeyAuthentication no
     KbdInteractiveAuthentication no
+    MaxAuthTries 1
 EOF
 chmod 644 "${TEVUN_SSHD_DROPIN}"
 
