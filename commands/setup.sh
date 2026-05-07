@@ -93,6 +93,14 @@ if [[ ! -f "${TEVUN_CONTAINERS_DIR}/docker-compose.yml" ]]; then
   chown "${TEVUN_USER_NAME}:${TEVUN_USER_GROUP}" "${TEVUN_CONTAINERS_DIR}/docker-compose.yml"
 fi
 
+if ! __has_docker_compose; then
+  __plot "[6/7] Skipping docker network (Docker/Compose v2 not installed yet)"
+  __plot "[7/7] Skipping container start (Docker/Compose v2 not installed yet)"
+  __plot "[FINISH] ~> Tevun files are ready, but Docker isn't installed."
+  __plot " Install Docker (https://docs.docker.com/engine/install/) and re-run: sudo tevun setup"
+  exit 0
+fi
+
 __plot "[6/7] Ensure 'reverse-proxy' docker network"
 if ! docker network ls --format '{{.Name}}' | grep -qx reverse-proxy; then
   docker network create --driver bridge reverse-proxy

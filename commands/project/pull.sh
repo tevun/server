@@ -3,6 +3,8 @@
 BASE=${1}
 PROJECT=${2}
 
+__require_docker_compose
+
 PROJECTS=${BASE}/projects
 
 cd ${PROJECTS}

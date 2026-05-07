@@ -6,6 +6,7 @@ PROJECTS=${TEVUN_DIR}/projects
 APP=${PROJECTS}/${PROJECT}/app
 
 source "${TEVUN_DIR}/tevun-functions.sh"
+__require_docker_compose
 
 if [[ ! -d ${PROJECTS}/${PROJECT} ]]; then
   __plot "[FINISH] ~> Project '${PROJECT}' doesn't exists"

@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-docker exec nginx-letsencrypt /app/force_renew
+__require_docker
+docker exec acme-companion /app/force_renew

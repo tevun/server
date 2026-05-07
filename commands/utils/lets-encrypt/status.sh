@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-docker exec nginx-letsencrypt /app/cert_status
+__require_docker
+docker exec acme-companion /app/cert_status
