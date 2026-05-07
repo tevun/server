@@ -30,9 +30,14 @@ TEVUN_USER_HOME=$(getent passwd "${TEVUN_USER_INSTALL}" | cut -d: -f6)
 
 __plot "[1/4] Install authorized_keys for '${TEVUN_USER_INSTALL}' (from ${TEVUN_KEY_SOURCE})"
 mkdir -p "${TEVUN_USER_HOME}/.ssh"
-cp "${TEVUN_KEY_SOURCE}" "${TEVUN_USER_HOME}/.ssh/authorized_keys"
+TEVUN_KEY_DEST="${TEVUN_USER_HOME}/.ssh/authorized_keys"
+if [[ "$(readlink -f "${TEVUN_KEY_SOURCE}")" == "$(readlink -f "${TEVUN_KEY_DEST}" 2>/dev/null)" ]]; then
+  __plot "  ~> source equals destination, skipping copy"
+else
+  cp "${TEVUN_KEY_SOURCE}" "${TEVUN_KEY_DEST}"
+fi
 chmod 700 "${TEVUN_USER_HOME}/.ssh"
-chmod 600 "${TEVUN_USER_HOME}/.ssh/authorized_keys"
+chmod 600 "${TEVUN_KEY_DEST}"
 chown -R "${TEVUN_USER_INSTALL}:${TEVUN_USER_INSTALL}" "${TEVUN_USER_HOME}/.ssh"
 
 __plot "[2/4] Grant sudo to '${TEVUN_USER_INSTALL}' via /etc/sudoers.d/${TEVUN_USER_INSTALL}"
